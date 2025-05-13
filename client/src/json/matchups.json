@@ -1,0 +1,116 @@
+{
+  "matches": {
+    "match1": {
+      "match": 1,
+      "fighter1": {
+        "name": "algonzo",
+        "insta": "@umamihousemusic"
+      },
+      "fighter2": {
+        "name": "chocolate-brown",
+        "insta": "@umamihousemusic"
+      },
+      "winner": {
+        "name": "",
+        "insta": ""
+      },
+      "type": "initial"
+    },
+    "match2": {
+      "match": 2,
+      "fighter1": {
+        "name": "clint",
+        "insta": "@umamihousemusic"
+      },
+      "fighter2": {
+        "name": "nory",
+        "insta": "@umamihousemusic"
+      },
+      "winner": {
+        "name": "",
+        "insta": ""
+      },
+      "type": "initial"
+    },
+    "match3": {
+      "match": 3,
+      "fighter1": {
+        "name": "sam",
+        "insta": "@umamihousemusic"
+      },
+      "fighter2": {
+        "name": "og-mountain",
+        "insta": "@umamihousemusic"
+      },
+      "winner": {
+        "name": "",
+        "insta": ""
+      },
+      "type": "initial"
+    },
+    "match4": {
+      "match": 4,
+      "fighter1": {
+        "name": "tim-lin",
+        "insta": "@umamihousemusic"
+      },
+      "fighter2": {
+        "name": "zain",
+        "insta": "@umamihousemusic"
+      },
+      "winner": {
+        "name": "",
+        "insta": ""
+      },
+      "type": "initial"
+    },
+    "match5": {
+      "match": 5,
+      "fighter1": {
+        "name": "",
+        "insta": ""
+      },
+      "fighter2": {
+        "name": "",
+        "insta": ""
+      },
+      "winner": {
+        "name": "",
+        "insta": ""
+      },
+      "type": "semi"
+    },
+    "match6": {
+      "match": 6,
+      "fighter1": {
+        "name": "",
+        "insta": ""
+      },
+      "fighter2": {
+        "name": "",
+        "insta": ""
+      },
+      "winner": {
+        "name": "",
+        "insta": ""
+      },
+      "type": "semi"
+    },
+    "match7": {
+      "match": 7,
+      "fighter1": {
+        "name": "",
+        "insta": ""
+      },
+      "fighter2": {
+        "name": "",
+        "insta": ""
+      },
+      "winner": {
+        "name": "",
+        "insta": ""
+      },
+      "type": "final"
+    }
+  }
+}
