@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 
 export default function GlobalNav() {
   const location = useLocation();
-  const homeLink = location.pathname === "/donate" ? "/home" : "/donate";
+  const homeLink = location.pathname === "/donate" ? "/" : "/donate";
 
   return (
     <>

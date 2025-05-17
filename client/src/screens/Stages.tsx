@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import randomizerStageAudio from "../assets/audio/randomizer-stage.wav"; // Import randomizer-stage audio
 
 export default function Stages() {
   const stages = [
@@ -15,12 +16,18 @@ export default function Stages() {
 
   useEffect(() => {
     let elapsed = 0;
+    const audio = new Audio(randomizerStageAudio); // Create audio object
+    audio.preload = "auto"; // Preload the audio
+    audio.loop = true; // Loop the audio
+    audio.play().catch((err) => console.error("Audio playback failed:", err)); // Play the audio
 
     const interval: ReturnType<typeof setInterval> = setInterval(() => {
       elapsed += 200; // Update elapsed time by 200ms
       if (elapsed >= 7000) {
         setHighlightedIndex(2); // Ensure it ends on "McKibbin Lofts"
         clearInterval(interval);
+        audio.pause(); // Stop the audio
+        audio.currentTime = 0; // Reset the audio
       } else {
         let randomIndex;
         do {
@@ -30,7 +37,11 @@ export default function Stages() {
       }
     }, 100); // Set interval to 200ms
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      audio.pause(); // Stop the audio if component unmounts
+      audio.currentTime = 0; // Reset the audio
+    };
   }, []);
 
   return (

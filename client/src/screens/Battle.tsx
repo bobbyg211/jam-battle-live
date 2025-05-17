@@ -2,6 +2,10 @@ import { useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaPlay, FaPause, FaRedo } from "react-icons/fa"; // Import icons
+import winnerAudioFile from "../assets/audio/winner.wav"; // Import winner audio file
+import impactClashAudioFile from "../assets/audio/impact-clash.wav"; // Import impact clash audio file
+import tenSecondLeftAudioFile from "../assets/audio/10-seconds-left.wav"; // Import 1-seconds-left audio file
+import newChampionAudioFile from "../assets/audio/new-champion.wav"; // Import new-champion audio file
 
 export default function Battle() {
   const location = useLocation();
@@ -15,13 +19,21 @@ export default function Battle() {
   const [showTimer, setShowTimer] = useState(false); // Show/hide timer
 
   const handleWinnerClick = (winner: string) => {
+    const audio = match === 7 ? new Audio(newChampionAudioFile) : new Audio(winnerAudioFile); // Choose audio based on match number
+    audio.play().catch((err) => console.error("Audio playback failed:", err)); // Play the appropriate audio
     setWinner(winner);
   };
 
   const startCountdown = () => {
     if (!timerRef.current) {
+      const oneSecondLeftAudio = new Audio(tenSecondLeftAudioFile); // Create audio object
+      oneSecondLeftAudio.preload = "auto"; // Preload the audio
+
       timerRef.current = window.setInterval(() => {
         setTimeLeft((prev) => {
+          if (prev === 11) {
+            oneSecondLeftAudio.play().catch((err) => console.error("Audio playback failed:", err)); // Play the audio when timer reaches 10 seconds
+          }
           if (prev > 0) {
             return prev - 1;
           } else {
@@ -100,6 +112,10 @@ export default function Battle() {
   };
 
   useEffect(() => {
+    const impactAudio = new Audio(impactClashAudioFile); // Create audio object
+    impactAudio.preload = "auto"; // Preload the audio
+    impactAudio.play().catch((err) => console.error("Audio playback failed:", err)); // Play the impact clash sound on page load
+
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mousemove", handleMouseMoveForTimer);
     return () => {

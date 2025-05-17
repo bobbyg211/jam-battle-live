@@ -176,7 +176,7 @@ h3 {
   color: #fff;
   text-align: center;
   text-shadow: 0px 0.654px 16.342px rgba(255, 55, 48, 0.79);
-  font-size: 25px;
+  font-size: 35px;
   font-style: normal;
   font-weight: 400;
   line-height: 100%; /* 87.531px */
@@ -188,6 +188,8 @@ h3 {
   padding: 0;
   margin: 20px 0 0 0;
   animation: fadeInOut 1.5s infinite;
+  text-decoration: none;
+  display: inline-block;
 }
 
 @keyframes fadeInOut {
@@ -861,15 +863,24 @@ h3 {
 .donate .content {
   display: flex;
   align-items: center;
+  /* width: 100%;
+  justify-content: space-evenly; */
+}
+
+.donate .logo {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 200px;
 }
 
 .donate .main {
-  padding-right: 100px;
+  position: relative;
 }
 
-.donate .main .logo {
-  max-width: 500px;
-  margin: 0 auto;
+.donate .venmo {
+  padding-left: 100px;
 }
 
 .donate .main * {
@@ -877,7 +888,38 @@ h3 {
 }
 
 .donate .qr {
-  max-height: 80vh;
+  max-height: 60vh;
   background-color: white;
   border-radius: 20px;
+}
+
+.donate .follow {
+  font-size: 28px;
+  font-family: sans-serif;
+  position: fixed;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 100%;
+  text-align: center;
+  background: black;
+  color: white;
+  padding: 10px;
+}
+
+.donate .details {
+  position: absolute;
+  z-index: 99;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.donate .malik {
+  height: 110vh;
+  position: relative;
+  top: 80px;
+  width: auto;
+  margin: 0 auto;
 }

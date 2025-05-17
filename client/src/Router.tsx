@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { BackgroundContext } from "./contexts/BackgroundContext";
 import { Routes, Route } from "react-router";
-import Start from "./screens/Start";
 import Home from "./screens/Home";
 import Donate from "./screens/Donate";
 import Battle from "./screens/Battle";
@@ -20,8 +19,7 @@ const Router = () => {
       }}
     >
       <Routes>
-        <Route path="/" element={<Start />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/donate" element={<Donate />} />
         <Route path="/stages" element={<Stages />} />
         <Route path="/fighters" element={<Fighters />} />

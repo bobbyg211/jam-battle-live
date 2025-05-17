@@ -7,8 +7,8 @@ export default function Home() {
       <div className="content">
         <img src={logo} alt="Jam Battle Logo" />
         <h1>8 Artists. 3 Judges. 1 Winner.</h1>
-        <Link to="/stages" className="glow-btn">
-          Enter the Arena
+        <Link to="/stages" className="start-btn">
+          Press Start
         </Link>
       </div>
     </div>
