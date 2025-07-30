@@ -867,12 +867,16 @@ h3 {
   justify-content: space-evenly; */
 }
 
-.donate .logo {
+.donate.malik .logo {
   position: fixed;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
   max-width: 200px;
+}
+
+.donate .main .logo {
+  max-width: 500px;
 }
 
 .donate .main {
@@ -922,4 +926,40 @@ h3 {
   top: 80px;
   width: auto;
   margin: 0 auto;
+}
+
+.intro-btn {
+  font-size: 18px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background: #132b3a;
+  border: 2px solid #66ccff;
+  color: #fff;
+  text-shadow: 0 0 5px #ff003c;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  font-size: 28px;
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translate(-50%, -20%);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.intro-btn:hover {
+  background: #0b1e2d;
+  color: #ff4b6e;
+  text-shadow: 0 0 5px #ff4b6e;
+}
+
+.battle .content .fighter img:hover ~ .intro-btn,
+.battle .content .fighter .name:hover ~ .intro-btn,
+.battle .content .fighter .intro-btn:hover {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
 }

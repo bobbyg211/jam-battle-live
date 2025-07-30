@@ -20,15 +20,21 @@ export default function Fighters() {
     const fighters = [
       "algonzo",
       "alpharedify",
+      "andrew-cheng",
       "ben-weiss",
       "chocolate-brown",
       "clint",
       "colin",
+      "cramos",
+      "george-ariza",
+      "jay",
       "justin-kim",
       "malik",
       "nory",
       "og-mountain",
+      "owen-chen",
       "sam",
+      "sarah-anjali",
       "tim-lin",
       "wave-ali",
       "zain",
@@ -40,6 +46,7 @@ export default function Fighters() {
     chooseCharacterAudio.play().catch((err) => console.error("Audio playback failed:", err)); // Play the chooseCharacter sound immediately
 
     const randomFighterAudio = new Audio(randomFighter); // Create audio object for randomFighter
+    randomFighterAudio.volume = 0.5;
     randomFighterAudio.preload = "auto"; // Preload the audio
     randomFighterAudio.autoplay = true; // Autoplay the audio
     randomFighterAudio.play().catch((err) => console.error("Audio playback failed:", err)); // Play the randomFighter sound immediately

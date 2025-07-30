@@ -1,6 +1,6 @@
 import logo from "../assets/jam-battle-logo.png";
-// import venmo from "../assets/alfred-venmo.png";
-import venmo from "../assets/robert-venmo.png";
+import venmo from "../assets/alfred-venmo.png";
+// import venmo from "../assets/robert-venmo.png";
 
 export default function Donate() {
   return (

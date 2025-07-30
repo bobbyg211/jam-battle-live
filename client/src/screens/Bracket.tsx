@@ -36,20 +36,38 @@ export default function Bracket() {
           updatedMatches[matchKey as keyof typeof updatedMatches].winner = winner;
 
           // Update fighters for subsequent matches
-          updatedMatches.match5.fighter1.name =
-            updatedMatches.match1.winner.name || updatedMatches.match5.fighter1.name;
-          updatedMatches.match5.fighter2.name =
-            updatedMatches.match2.winner.name || updatedMatches.match5.fighter2.name;
+          updatedMatches.match5.fighter1 = {
+            name: updatedMatches.match1.winner.name || updatedMatches.match5.fighter1.name,
+            insta: updatedMatches.match1.winner.insta || updatedMatches.match5.fighter1.insta,
+            audio: updatedMatches.match1.winner.audio || updatedMatches.match5.fighter1.audio,
+          };
+          updatedMatches.match5.fighter2 = {
+            name: updatedMatches.match2.winner.name || updatedMatches.match5.fighter2.name,
+            insta: updatedMatches.match2.winner.insta || updatedMatches.match5.fighter2.insta,
+            audio: updatedMatches.match2.winner.audio || updatedMatches.match5.fighter2.audio,
+          };
 
-          updatedMatches.match6.fighter1.name =
-            updatedMatches.match3.winner.name || updatedMatches.match6.fighter1.name;
-          updatedMatches.match6.fighter2.name =
-            updatedMatches.match4.winner.name || updatedMatches.match6.fighter2.name;
+          updatedMatches.match6.fighter1 = {
+            name: updatedMatches.match3.winner.name || updatedMatches.match6.fighter1.name,
+            insta: updatedMatches.match3.winner.insta || updatedMatches.match6.fighter1.insta,
+            audio: updatedMatches.match3.winner.audio || updatedMatches.match6.fighter1.audio,
+          };
+          updatedMatches.match6.fighter2 = {
+            name: updatedMatches.match4.winner.name || updatedMatches.match6.fighter2.name,
+            insta: updatedMatches.match4.winner.insta || updatedMatches.match6.fighter2.insta,
+            audio: updatedMatches.match4.winner.audio || updatedMatches.match6.fighter2.audio,
+          };
 
-          updatedMatches.match7.fighter1.name =
-            updatedMatches.match5.winner.name || updatedMatches.match7.fighter1.name;
-          updatedMatches.match7.fighter2.name =
-            updatedMatches.match6.winner.name || updatedMatches.match7.fighter2.name;
+          updatedMatches.match7.fighter1 = {
+            name: updatedMatches.match5.winner.name || updatedMatches.match7.fighter1.name,
+            insta: updatedMatches.match5.winner.insta || updatedMatches.match7.fighter1.insta,
+            audio: updatedMatches.match5.winner.audio || updatedMatches.match7.fighter1.audio,
+          };
+          updatedMatches.match7.fighter2 = {
+            name: updatedMatches.match6.winner.name || updatedMatches.match7.fighter2.name,
+            insta: updatedMatches.match6.winner.insta || updatedMatches.match7.fighter2.insta,
+            audio: updatedMatches.match6.winner.audio || updatedMatches.match7.fighter2.audio,
+          };
         }
 
         return { ...prevMatchups, matches: updatedMatches };

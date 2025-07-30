@@ -1,6 +1,5 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import { FaPlay, FaPause, FaRedo } from "react-icons/fa"; // Import icons
 import winnerAudioFile from "../assets/audio/winner.wav"; // Import winner audio file
 import impactClashAudioFile from "../assets/audio/impact-clash.wav"; // Import impact clash audio file
@@ -8,19 +7,40 @@ import tenSecondLeftAudioFile from "../assets/audio/10-seconds-left.wav"; // Imp
 import newChampionAudioFile from "../assets/audio/new-champion.wav"; // Import new-champion audio file
 
 export default function Battle() {
+  const time = 180;
   const location = useLocation();
   const { fighter1, fighter2, match } = location.state || {};
   const [winner, setWinner] = useState<string | null>(null);
-  const [timeLeft, setTimeLeft] = useState(60); // Countdown starts at 60 seconds
+  const [timeLeft, setTimeLeft] = useState(time); // Countdown starts at t seconds
   const timerRef = useRef<number | null>(null); // Use number type for timer ID
   const [firstFighter, setFirstFighter] = useState<string | null>(null); // Fighter who goes first
   const [isRandomizing, setIsRandomizing] = useState(false); // Randomizing state
   const [showRandomizer, setShowRandomizer] = useState(false); // Show/hide randomizer
   const [showTimer, setShowTimer] = useState(false); // Show/hide timer
+  const [isAudioEnabled, setIsAudioEnabled] = useState(true); // State to toggle audio
+  const introAudioRef = useRef<HTMLAudioElement | null>(null); // Ref to track the currently playing audio
+
+  const toggleIntroAudio = (audioFile: string) => {
+    if (introAudioRef.current) {
+      introAudioRef.current.pause();
+      introAudioRef.current.currentTime = 0;
+      introAudioRef.current = null;
+    } else {
+      const audio = new Audio(`/src/assets/audio/intros/${audioFile}`);
+      introAudioRef.current = audio;
+      audio.play().catch((err) => console.error("Audio playback failed:", err));
+    }
+  };
 
   const handleWinnerClick = (winner: string) => {
     const audio = match === 7 ? new Audio(newChampionAudioFile) : new Audio(winnerAudioFile); // Choose audio based on match number
     audio.play().catch((err) => console.error("Audio playback failed:", err)); // Play the appropriate audio
+
+    // const introAudioFile =
+    //   winner === "fighter1" ? `${fighter1.audio}.wav` : `${fighter2.audio}.wav`;
+    // const introAudio = new Audio(`/src/assets/audio/intros/${introAudioFile}`);
+    // introAudio.play().catch((err) => console.error("Intro audio playback failed:", err)); // Play the intro audio
+
     setWinner(winner);
   };
 
@@ -31,7 +51,7 @@ export default function Battle() {
 
       timerRef.current = window.setInterval(() => {
         setTimeLeft((prev) => {
-          if (prev === 11) {
+          if (prev === 11 && isAudioEnabled) {
             oneSecondLeftAudio.play().catch((err) => console.error("Audio playback failed:", err)); // Play the audio when timer reaches 10 seconds
           }
           if (prev > 0) {
@@ -54,7 +74,7 @@ export default function Battle() {
 
   const resetCountdown = () => {
     stopCountdown();
-    setTimeLeft(60);
+    setTimeLeft(time);
   };
 
   const randomizeFirstFighter = () => {
@@ -111,8 +131,17 @@ export default function Battle() {
     }
   };
 
+  const stopIntroAudio = () => {
+    if (introAudioRef.current) {
+      introAudioRef.current.pause();
+      introAudioRef.current.currentTime = 0;
+      introAudioRef.current = null;
+    }
+  };
+
   useEffect(() => {
     const impactAudio = new Audio(impactClashAudioFile); // Create audio object
+    impactAudio.volume = 0.45;
     impactAudio.preload = "auto"; // Preload the audio
     impactAudio.play().catch((err) => console.error("Audio playback failed:", err)); // Play the impact clash sound on page load
 
@@ -164,6 +193,16 @@ export default function Battle() {
             <FaRedo />
           </button>
         </div>
+        <div style={{ marginTop: "10px" }}>
+          <label style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <input
+              type="checkbox"
+              checked={isAudioEnabled}
+              onChange={(e) => setIsAudioEnabled(e.target.checked)}
+            />
+            Enable audio
+          </label>
+        </div>
       </div>
       <div className={`content ${winner ? `winner-selected ${winner}` : ""}`}>
         <div className={`fighter fighter1 ${fighter1.name}`}>
@@ -188,15 +227,37 @@ export default function Battle() {
           >
             {fighter1.insta}
           </span>
+          {!winner && (
+            <button
+              className="glow-btn intro-btn"
+              onClick={() => toggleIntroAudio(`${fighter1.audio}.wav`)}
+            >
+              Intro
+            </button>
+          )}
           <h3 className="win player1">Winner</h3>
           {winner ? (
             <>
               {match !== 7 ? (
-                <Link to="/bracket" state={{ match, winner: fighter1 }} className="glow-btn winner">
+                <Link
+                  to="/bracket"
+                  state={{ match, winner: fighter1 }}
+                  className="glow-btn winner"
+                  onClick={() => {
+                    stopIntroAudio();
+                  }}
+                >
                   Next match
                 </Link>
               ) : (
-                <Link to="/bracket" state={{ match, winner: fighter1 }} className="glow-btn winner">
+                <Link
+                  to="/bracket"
+                  state={{ match, winner: fighter1 }}
+                  className="glow-btn winner"
+                  onClick={() => {
+                    stopIntroAudio();
+                  }}
+                >
                   Continue
                 </Link>
               )}
@@ -256,17 +317,39 @@ export default function Battle() {
               transform: "translateX(50%)",
             }}
           >
-            {fighter1.insta}
+            {fighter2.insta}
           </span>
+          {!winner && (
+            <button
+              className="glow-btn intro-btn"
+              onClick={() => toggleIntroAudio(`${fighter2.audio}.wav`)}
+            >
+              Intro
+            </button>
+          )}
           <h3 className="win player2">Winner</h3>
           {winner ? (
             <>
               {match !== 7 ? (
-                <Link to="/bracket" state={{ match, winner: fighter2 }} className="glow-btn winner">
+                <Link
+                  to="/bracket"
+                  state={{ match, winner: fighter2 }}
+                  className="glow-btn winner"
+                  onClick={() => {
+                    stopIntroAudio();
+                  }}
+                >
                   Next match
                 </Link>
               ) : (
-                <Link to="/bracket" state={{ match, winner: fighter2 }} className="glow-btn winner">
+                <Link
+                  to="/bracket"
+                  state={{ match, winner: fighter2 }}
+                  className="glow-btn winner"
+                  onClick={() => {
+                    stopIntroAudio();
+                  }}
+                >
                   Continue
                 </Link>
               )}

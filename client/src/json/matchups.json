@@ -3,64 +3,76 @@
     "match1": {
       "match": 1,
       "fighter1": {
-        "name": "algonzo",
-        "insta": "@umamihousemusic"
+        "name": "chocolate-brown",
+        "insta": "@chocolatebrown_",
+        "audio": "chocolate"
       },
       "fighter2": {
-        "name": "chocolate-brown",
-        "insta": "@umamihousemusic"
+        "name": "sarah-anjali",
+        "insta": "@sarahanjalimusic",
+        "audio": "sarah"
       },
       "winner": {
         "name": "",
-        "insta": ""
+        "insta": "",
+        "audio": ""
       },
       "type": "initial"
     },
     "match2": {
       "match": 2,
       "fighter1": {
-        "name": "clint",
-        "insta": "@umamihousemusic"
+        "name": "wave-ali",
+        "insta": "@theewaveali",
+        "audio": "wave"
       },
       "fighter2": {
-        "name": "nory",
-        "insta": "@umamihousemusic"
+        "name": "cramos",
+        "insta": "@cramos.music",
+        "audio": "cramos"
       },
       "winner": {
         "name": "",
-        "insta": ""
+        "insta": "",
+        "audio": ""
       },
       "type": "initial"
     },
     "match3": {
       "match": 3,
       "fighter1": {
-        "name": "sam",
-        "insta": "@umamihousemusic"
+        "name": "owen-chen",
+        "insta": "@owenchenmusic",
+        "audio": "owen"
       },
       "fighter2": {
-        "name": "og-mountain",
-        "insta": "@umamihousemusic"
+        "name": "zain",
+        "insta": "@andaluguitar",
+        "audio": "andrew"
       },
       "winner": {
         "name": "",
-        "insta": ""
+        "insta": "",
+        "audio": ""
       },
       "type": "initial"
     },
     "match4": {
       "match": 4,
       "fighter1": {
-        "name": "tim-lin",
-        "insta": "@umamihousemusic"
+        "name": "george-ariza",
+        "insta": "@big_m8_",
+        "audio": "george"
       },
       "fighter2": {
-        "name": "zain",
-        "insta": "@umamihousemusic"
+        "name": "jay",
+        "insta": "@jayhassomethingtosay",
+        "audio": "jay"
       },
       "winner": {
         "name": "",
-        "insta": ""
+        "insta": "",
+        "audio": ""
       },
       "type": "initial"
     },
@@ -68,15 +80,18 @@
       "match": 5,
       "fighter1": {
         "name": "",
-        "insta": ""
+        "insta": "",
+        "audio": ""
       },
       "fighter2": {
         "name": "",
-        "insta": ""
+        "insta": "",
+        "audio": ""
       },
       "winner": {
         "name": "",
-        "insta": ""
+        "insta": "",
+        "audio": ""
       },
       "type": "semi"
     },
@@ -84,15 +99,18 @@
       "match": 6,
       "fighter1": {
         "name": "",
-        "insta": ""
+        "insta": "",
+        "audio": ""
       },
       "fighter2": {
         "name": "",
-        "insta": ""
+        "insta": "",
+        "audio": ""
       },
       "winner": {
         "name": "",
-        "insta": ""
+        "insta": "",
+        "audio": ""
       },
       "type": "semi"
     },
@@ -100,15 +118,18 @@
       "match": 7,
       "fighter1": {
         "name": "",
-        "insta": ""
+        "insta": "",
+        "audio": ""
       },
       "fighter2": {
         "name": "",
-        "insta": ""
+        "insta": "",
+        "audio": ""
       },
       "winner": {
         "name": "",
-        "insta": ""
+        "insta": "",
+        "audio": ""
       },
       "type": "final"
     }

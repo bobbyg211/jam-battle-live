@@ -3,6 +3,7 @@ import { BackgroundContext } from "./contexts/BackgroundContext";
 import { Routes, Route } from "react-router";
 import Home from "./screens/Home";
 import Donate from "./screens/Donate";
+// import Donate from "./screens/Donate-orig";
 import Battle from "./screens/Battle";
 import Stages from "./screens/Stages";
 import Fighters from "./screens/Fighters";
