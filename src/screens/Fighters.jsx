@@ -4,7 +4,7 @@ import matchups from "../json/matchups.json";
 import randomFighter from "../assets/audio/randomizer-fighter.wav";
 import chooseCharacter from "../assets/audio/choose-character.wav";
 
-// Import all fighter images and map them by name
+// Import all fighter images and map by name
 const fighterImagesRaw = import.meta.glob("../assets/fighters/*.png", {
   eager: true,
   import: "default",
@@ -27,6 +27,14 @@ export default function Fighters() {
   const [currentFighter1, setCurrentFighter1] = useState(fighter1.name);
   const [currentFighter2, setCurrentFighter2] = useState(fighter2.name);
   const [isRandomizerFinished, setIsRandomizerFinished] = useState(false);
+
+  // Preload all fighter images into memory
+  useEffect(() => {
+    Object.values(imagesByName).forEach((url) => {
+      const img = new Image();
+      img.src = url;
+    });
+  }, []);
 
   useEffect(() => {
     const fighters = [
@@ -72,13 +80,13 @@ export default function Fighters() {
     });
 
     const interval1 = window.setInterval(() => {
-      const randomName = fighters[Math.floor(Math.random() * fighters.length)];
-      if (imagesByName[randomName]) setCurrentFighter1(randomName);
+      const name = fighters[Math.floor(Math.random() * fighters.length)];
+      if (imagesByName[name]) setCurrentFighter1(name);
     }, 100);
 
     const interval2 = window.setInterval(() => {
-      const randomName = fighters[Math.floor(Math.random() * fighters.length)];
-      if (imagesByName[randomName]) setCurrentFighter2(randomName);
+      const name = fighters[Math.floor(Math.random() * fighters.length)];
+      if (imagesByName[name]) setCurrentFighter2(name);
     }, 100);
 
     setTimeout(() => {
@@ -105,12 +113,20 @@ export default function Fighters() {
         <h1>Choose Your Fighters</h1>
         <div className="select-fighters">
           <div className={`fighter fighter1 ${currentFighter1}`}>
-            <img src={imagesByName[currentFighter1]} alt={currentFighter1} />
+            <img
+              key={currentFighter1} // force remount so it always redraws
+              src={imagesByName[currentFighter1]}
+              alt={currentFighter1}
+            />
             <h2 className="name">{currentFighter1.replace(/-/g, " ")}</h2>
             <h3 className="player player1">Player 1</h3>
           </div>
           <div className={`fighter fighter2 ${currentFighter2}`}>
-            <img src={imagesByName[currentFighter2]} alt={currentFighter2} />
+            <img
+              key={currentFighter2} // force remount so it always redraws
+              src={imagesByName[currentFighter2]}
+              alt={currentFighter2}
+            />
             <h2 className="name">{currentFighter2.replace(/-/g, " ")}</h2>
             <h3 className="player player2">Player 2</h3>
           </div>
