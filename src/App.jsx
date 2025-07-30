@@ -1,4 +1,4 @@
-import { BrowserRouter, useLocation } from "react-router";
+import { HashRouter, useLocation } from "react-router";
 import GlobalNav from "./components/GlobalNav.jsx";
 import { BackgroundContext } from "./contexts/BackgroundContext.jsx";
 import { MatchupsProvider } from "./contexts/MatchupsContext.jsx";
@@ -8,20 +8,20 @@ const stageImages = import.meta.glob("/src/assets/backgrounds/*.{png,jpg,jpeg}")
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <GlobalNav />
       <MatchupsProvider>
         <BackgroundProvider>
           <Router />
         </BackgroundProvider>
       </MatchupsProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
 function BackgroundProvider({ children }) {
   const stageImagePaths = Object.keys(stageImages);
-  const location = useLocation(); // Now safely used within BrowserRouter
+  const location = useLocation(); // Now safely used within HashRouter
   const randomStageImage = stageImagePaths[Math.floor(Math.random() * stageImagePaths.length)];
 
   return (
