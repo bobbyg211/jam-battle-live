@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import randomizerStageAudio from "../assets/audio/randomizer-stage.wav"; // Import randomizer-stage audio
 
@@ -12,16 +12,20 @@ export default function Stages() {
     { title: "Bermuda Triangle", img: "src/assets/stages/bermuda-triangle.jpg" },
   ];
 
-  const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null);
+  const [highlightedIndex, setHighlightedIndex] = useState(null);
 
   useEffect(() => {
     let elapsed = 0;
     const audio = new Audio(randomizerStageAudio); // Create audio object
     audio.preload = "auto"; // Preload the audio
     audio.loop = true; // Loop the audio
-    audio.play().catch((err) => console.error("Audio playback failed:", err)); // Play the audio
+    audio.play().catch((err) => {
+      if (err.name !== "AbortError") {
+        console.error("Audio playback failed:", err);
+      }
+    }); // Play the audio
 
-    const interval: ReturnType<typeof setInterval> = setInterval(() => {
+    const interval = setInterval(() => {
       elapsed += 200; // Update elapsed time by 200ms
       if (elapsed >= 7000) {
         setHighlightedIndex(2); // Ensure it ends on "McKibbin Lofts"
@@ -42,6 +46,8 @@ export default function Stages() {
       audio.pause(); // Stop the audio if component unmounts
       audio.currentTime = 0; // Reset the audio
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

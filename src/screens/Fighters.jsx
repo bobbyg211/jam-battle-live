@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router";
 import matchups from "../json/matchups.json";
 import randomFighter from "../assets/audio/randomizer-fighter.wav";
 import chooseCharacter from "../assets/audio/choose-character.wav";
@@ -43,16 +42,24 @@ export default function Fighters() {
     const chooseCharacterAudio = new Audio(chooseCharacter); // Create audio object for chooseCharacter
     chooseCharacterAudio.preload = "auto"; // Preload the audio
     chooseCharacterAudio.autoplay = true; // Autoplay the audio
-    chooseCharacterAudio.play().catch((err) => console.error("Audio playback failed:", err)); // Play the chooseCharacter sound immediately
+    chooseCharacterAudio.play().catch((err) => {
+      if (err.name !== "AbortError") {
+        console.error("Audio playback failed:", err);
+      }
+    }); // Play the chooseCharacter sound immediately
 
     const randomFighterAudio = new Audio(randomFighter); // Create audio object for randomFighter
     randomFighterAudio.volume = 0.5;
     randomFighterAudio.preload = "auto"; // Preload the audio
     randomFighterAudio.autoplay = true; // Autoplay the audio
-    randomFighterAudio.play().catch((err) => console.error("Audio playback failed:", err)); // Play the randomFighter sound immediately
+    randomFighterAudio.play().catch((err) => {
+      if (err.name !== "AbortError") {
+        console.error("Audio playback failed:", err);
+      }
+    }); // Play the randomFighter sound immediately
 
-    let interval1: number | null = null;
-    let interval2: number | null = null;
+    let interval1 = null;
+    let interval2 = null;
 
     interval1 = window.setInterval(() => {
       setCurrentFighter1(fighters[Math.floor(Math.random() * fighters.length)]);

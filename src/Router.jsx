@@ -1,13 +1,13 @@
 import { useContext } from "react";
-import { BackgroundContext } from "./contexts/BackgroundContext";
+import { BackgroundContext } from "./contexts/BackgroundContext.jsx";
 import { Routes, Route } from "react-router";
-import Home from "./screens/Home";
-import Donate from "./screens/Donate";
-// import Donate from "./screens/Donate-orig";
-import Battle from "./screens/Battle";
-import Stages from "./screens/Stages";
-import Fighters from "./screens/Fighters";
-import Bracket from "./screens/Bracket";
+import Home from "./screens/Home.jsx";
+import Donate from "./screens/Donate.jsx";
+// import Donate from "./screens/Donate-orig.jsx";
+import Battle from "./screens/Battle.jsx";
+import Stages from "./screens/Stages.jsx";
+import Fighters from "./screens/Fighters.jsx";
+import Bracket from "./screens/Bracket.jsx";
 
 const Router = () => {
   const { background } = useContext(BackgroundContext);

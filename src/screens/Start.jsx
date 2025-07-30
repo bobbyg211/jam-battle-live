@@ -7,7 +7,7 @@ export default function Start() {
 
   const handleEnterArena = () => {
     setShowVideo(true);
-    const videoElement = document.querySelector(".video-overlay video") as HTMLVideoElement;
+    const videoElement = document.querySelector(".video-overlay video");
     if (videoElement) {
       setTimeout(() => {
         videoElement.play();

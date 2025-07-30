@@ -1,8 +1,7 @@
 import logo from "../assets/jam-battle-logo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router";
 import { useContext, useEffect } from "react";
 import { MatchupsContext } from "../contexts/MatchupsContext";
-import { useLocation } from "react-router-dom";
 
 export default function Bracket() {
   const location = useLocation();
@@ -10,13 +9,7 @@ export default function Bracket() {
   const { match, winner } = state || {};
   const { matchups, setMatchups } = useContext(MatchupsContext) || {}; // Access matchups from context
 
-  console.log(match, winner, matchups);
-
   useEffect(() => {
-    console.log("match:", match);
-    console.log("winner:", winner);
-    console.log("matchups.matches:", matchups?.matches || {});
-
     if (
       match &&
       winner &&
@@ -29,11 +22,11 @@ export default function Bracket() {
       setMatchups((prevMatchups) => {
         const updatedMatches = { ...prevMatchups.matches };
         const matchKey = Object.keys(updatedMatches).find(
-          (key) => updatedMatches[key as keyof typeof updatedMatches].match === match
+          (key) => updatedMatches[key].match === match
         );
 
         if (matchKey) {
-          updatedMatches[matchKey as keyof typeof updatedMatches].winner = winner;
+          updatedMatches[matchKey].winner = winner;
 
           // Update fighters for subsequent matches
           updatedMatches.match5.fighter1 = {
@@ -75,6 +68,8 @@ export default function Bracket() {
     } else {
       console.log("Condition is false, not updating matchups.");
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.key]); // Run every time the page is visited
 
   if (!matchups) {

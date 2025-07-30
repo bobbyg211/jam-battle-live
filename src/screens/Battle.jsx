@@ -1,4 +1,4 @@
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router";
 import { useState, useEffect, useRef } from "react";
 import { FaPlay, FaPause, FaRedo } from "react-icons/fa"; // Import icons
 import winnerAudioFile from "../assets/audio/winner.wav"; // Import winner audio file
@@ -10,17 +10,17 @@ export default function Battle() {
   const time = 180;
   const location = useLocation();
   const { fighter1, fighter2, match } = location.state || {};
-  const [winner, setWinner] = useState<string | null>(null);
+  const [winner, setWinner] = useState(null);
   const [timeLeft, setTimeLeft] = useState(time); // Countdown starts at t seconds
-  const timerRef = useRef<number | null>(null); // Use number type for timer ID
-  const [firstFighter, setFirstFighter] = useState<string | null>(null); // Fighter who goes first
+  const timerRef = useRef(null); // Use number type for timer ID
+  const [firstFighter, setFirstFighter] = useState(null); // Fighter who goes first
   const [isRandomizing, setIsRandomizing] = useState(false); // Randomizing state
   const [showRandomizer, setShowRandomizer] = useState(false); // Show/hide randomizer
   const [showTimer, setShowTimer] = useState(false); // Show/hide timer
   const [isAudioEnabled, setIsAudioEnabled] = useState(true); // State to toggle audio
-  const introAudioRef = useRef<HTMLAudioElement | null>(null); // Ref to track the currently playing audio
+  const introAudioRef = useRef(null); // Ref to track the currently playing audio
 
-  const toggleIntroAudio = (audioFile: string) => {
+  const toggleIntroAudio = (audioFile) => {
     if (introAudioRef.current) {
       introAudioRef.current.pause();
       introAudioRef.current.currentTime = 0;
@@ -32,7 +32,7 @@ export default function Battle() {
     }
   };
 
-  const handleWinnerClick = (winner: string) => {
+  const handleWinnerClick = (winner) => {
     const audio = match === 7 ? new Audio(newChampionAudioFile) : new Audio(winnerAudioFile); // Choose audio based on match number
     audio.play().catch((err) => console.error("Audio playback failed:", err)); // Play the appropriate audio
 
@@ -91,7 +91,7 @@ export default function Battle() {
     }, 100);
   };
 
-  const handleMouseMove = (e: MouseEvent) => {
+  const handleMouseMove = (e) => {
     const { clientY, clientX } = e; // Use MouseEvent properties
     const { innerWidth } = window;
     const isNearTopCenter =
@@ -99,7 +99,7 @@ export default function Battle() {
     setShowRandomizer(isNearTopCenter);
   };
 
-  const handleMouseMoveForTimer = (e: MouseEvent) => {
+  const handleMouseMoveForTimer = (e) => {
     const { clientY, clientX } = e; // Use MouseEvent properties
     const { innerWidth, innerHeight } = window;
     const isNearBottomCenter =
@@ -281,7 +281,7 @@ export default function Battle() {
               <path
                 d="M261.699 0H423L190.5 768L0 768L261.699 0Z"
                 fill="#FFB0B0"
-                fill-opacity="0.68"
+                fillOpacity="0.68"
               />
             </svg>
             <svg
@@ -292,7 +292,7 @@ export default function Battle() {
               viewBox="0 0 423 768"
               fill="none"
             >
-              <path d="M261.699 0H423L111.5 768L0 768L261.699 0Z" fill="white" fill-opacity="0.8" />
+              <path d="M261.699 0H423L111.5 768L0 768L261.699 0Z" fill="white" fillOpacity="0.8" />
             </svg>
           </div>
           <h1>VS</h1>
