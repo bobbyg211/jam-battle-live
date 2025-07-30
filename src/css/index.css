@@ -103,6 +103,25 @@ h3 {
   text-align: center;
 }
 
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading span {
+  display: block;
+  margin-top: 20px;
+  font-size: 50px;
+}
+
 /* Buttons  */
 
 .glow-btn {
