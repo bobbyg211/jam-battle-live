@@ -71,6 +71,10 @@ h3 {
   text-transform: uppercase;
 }
 
+p {
+  font-family: monospace;
+}
+
 #main {
   height: 100vh;
   width: 100%;
@@ -974,4 +978,115 @@ h3 {
   left: 50%;
   transform: translateX(-50%);
   max-width: 200px;
+}
+
+.setup .content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.setup .content .matchups .rounds {
+  display: flex;
+  align-items: center;
+}
+
+.setup .content .matchups .rounds .column .match {
+  position: relative;
+}
+
+.setup .content .matchups .rounds .column.initial .match {
+  margin-bottom: 40px;
+}
+
+.setup .content .matchups .rounds .column .match .fighter {
+  border: 2px solid white;
+  border-radius: 10px;
+  width: 175px;
+  height: 100px;
+  display: block;
+  background: rgba(0, 0, 0, 0.6);
+  margin: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.setup .content .matchups .rounds .column .match .fighter h3 {
+  font-size: 24px;
+}
+
+.setup .content .matchups .rounds .column .match .setup-btn {
+  opacity: 0;
+  pointer-events: none;
+  padding: 15px;
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 20%);
+}
+
+.setup .content .matchups .rounds .column .match:hover .setup-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0%);
+}
+
+.setup .content .stages .stage {
+  border: 2px solid white;
+  border-radius: 10px;
+  width: 450px;
+  height: 300px;
+  display: block;
+  background: rgba(0, 0, 0, 0.6);
+  margin: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.setup .content .stages .stage::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.setup .content .stages .stage .stage-btn {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -35%);
+}
+
+.setup .content .stages .stage:hover .stage-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+}
+
+.setup .content .stages .stage .stage-name {
+  position: relative;
+  z-index: 2;
+}
+
+.dialog h3 {
+  text-align: left;
+  margin: 0;
+  text-shadow: none;
 }
