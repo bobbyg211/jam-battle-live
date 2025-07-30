@@ -21,7 +21,7 @@ body {
   font-family: "FIGHTING FORCE", sans-serif;
   background: black;
   color: white;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 h1,
@@ -128,7 +128,7 @@ h3 {
   font-size: 25px;
   text-transform: uppercase;
   color: #fff;
-  background: #0b1e2d; /* deep icy blue base */
+  background: #0b1e2d !important; /* deep icy blue base */
   border: 2px solid #66ccff;
   padding: 0.75em 1.5em;
   border-radius: 0;
@@ -142,26 +142,18 @@ h3 {
 }
 
 .glow-btn:hover {
-  background: #132b3a; /* slightly lighter icy tone */
+  background: #132b3a !important; /* slightly lighter icy tone */
   box-shadow: 0 0 12px #66ccff, inset 0 0 6px #132b3a;
   color: #ff4b6e;
   text-shadow: 0 0 0px #ff4b6e;
 }
 
-.glow-btn.top-left-link,
-.glow-btn.top-right-link {
+.glow-btn.menu-open {
   position: fixed;
   top: -100px; /* Hidden offscreen */
   z-index: 1000;
   transition: top 0.3s ease; /* Smooth slide-in effect */
-}
-
-.glow-btn.top-left-link {
-  left: 20px;
-}
-
-.glow-btn.top-right-link {
-  right: 20px;
+  right: 40px;
 }
 
 .hover-area {
@@ -173,21 +165,12 @@ h3 {
   pointer-events: auto;
 }
 
-.hover-area.left {
-  left: 0;
-}
-
 .hover-area.right {
   right: 0;
 }
 
-.hover-area.left:hover ~ .global-nav .top-left-link,
-.global-nav .top-left-link:hover {
-  top: 20px; /* Slide into view and stay visible */
-}
-
-.hover-area.right:hover ~ .global-nav .top-right-link,
-.global-nav .top-right-link:hover {
+.hover-area.right:hover ~ .global-nav .menu-open,
+.global-nav .menu-open:hover {
   top: 20px; /* Slide into view and stay visible */
 }
 
@@ -981,4 +964,14 @@ h3 {
   opacity: 1;
   pointer-events: auto;
   transform: translate(-50%, -50%);
+}
+
+/* Setup */
+
+.setup .logo {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 200px;
 }

@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { BackgroundContext } from "./contexts/BackgroundContext.jsx";
 import { Routes, Route } from "react-router";
 import Home from "./screens/Home.jsx";
+import Setup from "./screens/Setup.jsx";
 import Donate from "./screens/Donate.jsx";
-// import Donate from "./screens/Donate-orig.jsx";
 import Battle from "./screens/Battle.jsx";
 import Stages from "./screens/Stages.jsx";
 import Fighters from "./screens/Fighters.jsx";
@@ -21,6 +21,7 @@ const Router = () => {
     >
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/setup" element={<Setup />} />
         <Route path="/donate" element={<Donate />} />
         <Route path="/stages" element={<Stages />} />
         <Route path="/fighters" element={<Fighters />} />
