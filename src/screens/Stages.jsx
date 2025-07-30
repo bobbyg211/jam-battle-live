@@ -53,6 +53,8 @@ export default function Stages() {
       audio.pause();
       audio.currentTime = 0;
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
