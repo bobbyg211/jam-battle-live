@@ -1,24 +1,44 @@
 import { useLocation, Link } from "react-router";
 import { useState, useEffect, useRef } from "react";
-import { FaPlay, FaPause, FaRedo } from "react-icons/fa"; // Import icons
-import winnerAudioFile from "../assets/audio/winner.wav"; // Import winner audio file
-import impactClashAudioFile from "../assets/audio/impact-clash.wav"; // Import impact clash audio file
-import tenSecondLeftAudioFile from "../assets/audio/10-seconds-left.wav"; // Import 1-seconds-left audio file
-import newChampionAudioFile from "../assets/audio/new-champion.wav"; // Import new-champion audio file
+import { FaPlay, FaPause, FaRedo } from "react-icons/fa";
+
+// Import all audio and images eagerly as URLs
+const fighterImages = import.meta.glob("../assets/fighters/*.png", {
+  eager: true,
+  import: "default",
+});
+const introsAudio = import.meta.glob("../assets/audio/intros/*.wav", {
+  eager: true,
+  import: "default",
+});
+const audioFiles = import.meta.glob("../assets/audio/*.wav", {
+  eager: true,
+  import: "default",
+});
+
+// Grab specific global sounds
+const winnerAudioFile = audioFiles["../assets/audio/winner.wav"];
+const impactClashAudioFile = audioFiles["../assets/audio/impact-clash.wav"];
+const tenSecondLeftAudioFile = audioFiles["../assets/audio/10-seconds-left.wav"];
+const newChampionAudioFile = audioFiles["../assets/audio/new-champion.wav"];
 
 export default function Battle() {
   const time = 180;
   const location = useLocation();
   const { fighter1, fighter2, match } = location.state || {};
   const [winner, setWinner] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(time); // Countdown starts at t seconds
-  const timerRef = useRef(null); // Use number type for timer ID
-  const [firstFighter, setFirstFighter] = useState(null); // Fighter who goes first
-  const [isRandomizing, setIsRandomizing] = useState(false); // Randomizing state
-  const [showRandomizer, setShowRandomizer] = useState(false); // Show/hide randomizer
-  const [showTimer, setShowTimer] = useState(false); // Show/hide timer
-  const [isAudioEnabled, setIsAudioEnabled] = useState(true); // State to toggle audio
-  const introAudioRef = useRef(null); // Ref to track the currently playing audio
+  const [timeLeft, setTimeLeft] = useState(time);
+  const timerRef = useRef(null);
+  const [firstFighter, setFirstFighter] = useState(null);
+  const [isRandomizing, setIsRandomizing] = useState(false);
+  const [showRandomizer, setShowRandomizer] = useState(false);
+  const [showTimer, setShowTimer] = useState(false);
+  const [isAudioEnabled, setIsAudioEnabled] = useState(true);
+  const introAudioRef = useRef(null);
+
+  const getFighterImage = (fighterName) => fighterImages[`../assets/fighters/${fighterName}.png`];
+
+  const getIntroAudio = (audioFileName) => introsAudio[`../assets/audio/intros/${audioFileName}`];
 
   const toggleIntroAudio = (audioFile) => {
     if (introAudioRef.current) {
@@ -26,33 +46,30 @@ export default function Battle() {
       introAudioRef.current.currentTime = 0;
       introAudioRef.current = null;
     } else {
-      const audio = new Audio(`/src/assets/audio/intros/${audioFile}`);
-      introAudioRef.current = audio;
-      audio.play().catch((err) => console.error("Audio playback failed:", err));
+      const url = getIntroAudio(audioFile);
+      if (url) {
+        const audio = new Audio(url);
+        introAudioRef.current = audio;
+        audio.play().catch((err) => console.error("Audio playback failed:", err));
+      }
     }
   };
 
   const handleWinnerClick = (winner) => {
-    const audio = match === 7 ? new Audio(newChampionAudioFile) : new Audio(winnerAudioFile); // Choose audio based on match number
-    audio.play().catch((err) => console.error("Audio playback failed:", err)); // Play the appropriate audio
-
-    // const introAudioFile =
-    //   winner === "fighter1" ? `${fighter1.audio}.wav` : `${fighter2.audio}.wav`;
-    // const introAudio = new Audio(`/src/assets/audio/intros/${introAudioFile}`);
-    // introAudio.play().catch((err) => console.error("Intro audio playback failed:", err)); // Play the intro audio
-
+    const url = match === 7 ? newChampionAudioFile : winnerAudioFile;
+    const audio = new Audio(url);
+    audio.play().catch((err) => console.error("Audio playback failed:", err));
     setWinner(winner);
   };
 
   const startCountdown = () => {
     if (!timerRef.current) {
-      const oneSecondLeftAudio = new Audio(tenSecondLeftAudioFile); // Create audio object
-      oneSecondLeftAudio.preload = "auto"; // Preload the audio
-
+      const oneSecondLeftAudio = new Audio(tenSecondLeftAudioFile);
+      oneSecondLeftAudio.preload = "auto";
       timerRef.current = window.setInterval(() => {
         setTimeLeft((prev) => {
           if (prev === 11 && isAudioEnabled) {
-            oneSecondLeftAudio.play().catch((err) => console.error("Audio playback failed:", err)); // Play the audio when timer reaches 10 seconds
+            oneSecondLeftAudio.play().catch((err) => console.error("Audio playback failed:", err));
           }
           if (prev > 0) {
             return prev - 1;
@@ -92,7 +109,7 @@ export default function Battle() {
   };
 
   const handleMouseMove = (e) => {
-    const { clientY, clientX } = e; // Use MouseEvent properties
+    const { clientY, clientX } = e;
     const { innerWidth } = window;
     const isNearTopCenter =
       clientY < 150 && clientX > innerWidth / 2 - 200 && clientX < innerWidth / 2 + 200;
@@ -100,35 +117,24 @@ export default function Battle() {
   };
 
   const handleMouseMoveForTimer = (e) => {
-    const { clientY, clientX } = e; // Use MouseEvent properties
+    const { clientY, clientX } = e;
     const { innerWidth, innerHeight } = window;
     const isNearBottomCenter =
       clientY > innerHeight - 200 &&
       clientX > innerWidth / 2 - 200 &&
       clientX < innerWidth / 2 + 200;
     if (timerRef.current) {
-      setShowTimer(true); // Always show timer when running
+      setShowTimer(true);
     } else {
-      setShowTimer(isNearBottomCenter); // Show timer only when in activation area if not running
+      setShowTimer(isNearBottomCenter);
     }
   };
 
-  const handleMouseEnterRandomizer = () => {
-    setShowRandomizer(true); // Keep randomizer visible when hovering over it
-  };
-
-  const handleMouseLeaveRandomizer = () => {
-    setShowRandomizer(false); // Hide randomizer when leaving it
-  };
-
-  const handleMouseEnterTimer = () => {
-    setShowTimer(true); // Keep timer visible when hovering over it
-  };
-
+  const handleMouseEnterRandomizer = () => setShowRandomizer(true);
+  const handleMouseLeaveRandomizer = () => setShowRandomizer(false);
+  const handleMouseEnterTimer = () => setShowTimer(true);
   const handleMouseLeaveTimer = () => {
-    if (!timerRef.current) {
-      setShowTimer(false); // Hide timer only if not running
-    }
+    if (!timerRef.current) setShowTimer(false);
   };
 
   const stopIntroAudio = () => {
@@ -140,25 +146,25 @@ export default function Battle() {
   };
 
   useEffect(() => {
-    const impactAudio = new Audio(impactClashAudioFile); // Create audio object
+    const impactAudio = new Audio(impactClashAudioFile);
     impactAudio.volume = 0.45;
-    impactAudio.preload = "auto"; // Preload the audio
-    impactAudio.play().catch((err) => console.error("Audio playback failed:", err)); // Play the impact clash sound on page load
+    impactAudio.preload = "auto";
+    impactAudio.play().catch((err) => console.error("Audio playback failed:", err));
 
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mousemove", handleMouseMoveForTimer);
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mousemove", handleMouseMoveForTimer);
-      stopCountdown(); // Cleanup on component unmount
+      stopCountdown();
     };
   }, []);
 
   return (
-    <div className={`battle container`}>
+    <div className="battle container">
       {/* Randomizer */}
       <div
-        className={`randomizer ${showRandomizer && !winner ? "visible" : "hidden"}`} // Hide if a winner is selected
+        className={`randomizer ${showRandomizer && !winner ? "visible" : "hidden"}`}
         onMouseEnter={handleMouseEnterRandomizer}
         onMouseLeave={handleMouseLeaveRandomizer}
       >
@@ -174,9 +180,9 @@ export default function Battle() {
         </button>
       </div>
 
-      {/* Countdown clock */}
+      {/* Countdown Clock */}
       <div
-        className={`countdown ${showTimer && !winner ? "visible" : "hidden"}`} // Hide if a winner is selected
+        className={`countdown ${showTimer && !winner ? "visible" : "hidden"}`}
         onMouseEnter={handleMouseEnterTimer}
         onMouseLeave={handleMouseLeaveTimer}
         style={{ textAlign: "center" }}
@@ -204,6 +210,8 @@ export default function Battle() {
           </label>
         </div>
       </div>
+
+      {/* Fighters */}
       <div className={`content ${winner ? `winner-selected ${winner}` : ""}`}>
         <div className={`fighter fighter1 ${fighter1.name}`}>
           {winner === "fighter1" && (
@@ -212,21 +220,9 @@ export default function Battle() {
               <div className="shine-circle-secondary"></div>
             </>
           )}
-          <img src={`/src/assets/fighters/${fighter1.name}.png`} alt={fighter1.name} />
+          <img src={getFighterImage(fighter1.name)} alt={fighter1.name} />
           <h2 className="name">{fighter1.name.replace(/-/g, " ")}</h2>
-          <span
-            style={{
-              fontWeight: 900,
-              fontFamily: "sans-serif",
-              fontSize: 28,
-              position: "absolute",
-              bottom: "40px",
-              left: "50%",
-              transform: "translateX(-50%)",
-            }}
-          >
-            {fighter1.insta}
-          </span>
+          <span style={fighterLabelStyle("left")}>{fighter1.insta}</span>
           {!winner && (
             <button
               className="glow-btn intro-btn"
@@ -237,37 +233,22 @@ export default function Battle() {
           )}
           <h3 className="win player1">Winner</h3>
           {winner ? (
-            <>
-              {match !== 7 ? (
-                <Link
-                  to="/bracket"
-                  state={{ match, winner: fighter1 }}
-                  className="glow-btn winner"
-                  onClick={() => {
-                    stopIntroAudio();
-                  }}
-                >
-                  Next match
-                </Link>
-              ) : (
-                <Link
-                  to="/bracket"
-                  state={{ match, winner: fighter1 }}
-                  className="glow-btn winner"
-                  onClick={() => {
-                    stopIntroAudio();
-                  }}
-                >
-                  Continue
-                </Link>
-              )}
-            </>
+            <Link
+              to="/bracket"
+              state={{ match, winner: fighter1 }}
+              className="glow-btn winner"
+              onClick={stopIntroAudio}
+            >
+              {match !== 7 ? "Next match" : "Continue"}
+            </Link>
           ) : (
             <button className="glow-btn winner" onClick={() => handleWinnerClick("fighter1")}>
               Winner
             </button>
           )}
         </div>
+
+        {/* VS Divider */}
         <div className="vs">
           <div className="streaks">
             <svg
@@ -297,6 +278,7 @@ export default function Battle() {
           </div>
           <h1>VS</h1>
         </div>
+
         <div className={`fighter fighter2 ${fighter2.name}`}>
           {winner === "fighter2" && (
             <>
@@ -304,21 +286,9 @@ export default function Battle() {
               <div className="shine-circle-secondary"></div>
             </>
           )}
-          <img src={`/src/assets/fighters/${fighter2.name}.png`} alt={fighter2.name} />
+          <img src={getFighterImage(fighter2.name)} alt={fighter2.name} />
           <h2 className="name">{fighter2.name.replace(/-/g, " ")}</h2>
-          <span
-            style={{
-              fontWeight: 900,
-              fontFamily: "sans-serif",
-              fontSize: 28,
-              position: "absolute",
-              bottom: "40px",
-              right: "50%",
-              transform: "translateX(50%)",
-            }}
-          >
-            {fighter2.insta}
-          </span>
+          <span style={fighterLabelStyle("right")}>{fighter2.insta}</span>
           {!winner && (
             <button
               className="glow-btn intro-btn"
@@ -329,31 +299,14 @@ export default function Battle() {
           )}
           <h3 className="win player2">Winner</h3>
           {winner ? (
-            <>
-              {match !== 7 ? (
-                <Link
-                  to="/bracket"
-                  state={{ match, winner: fighter2 }}
-                  className="glow-btn winner"
-                  onClick={() => {
-                    stopIntroAudio();
-                  }}
-                >
-                  Next match
-                </Link>
-              ) : (
-                <Link
-                  to="/bracket"
-                  state={{ match, winner: fighter2 }}
-                  className="glow-btn winner"
-                  onClick={() => {
-                    stopIntroAudio();
-                  }}
-                >
-                  Continue
-                </Link>
-              )}
-            </>
+            <Link
+              to="/bracket"
+              state={{ match, winner: fighter2 }}
+              className="glow-btn winner"
+              onClick={stopIntroAudio}
+            >
+              {match !== 7 ? "Next match" : "Continue"}
+            </Link>
           ) : (
             <button className="glow-btn winner" onClick={() => handleWinnerClick("fighter2")}>
               Winner
@@ -364,3 +317,13 @@ export default function Battle() {
     </div>
   );
 }
+
+const fighterLabelStyle = (side) => ({
+  fontWeight: 900,
+  fontFamily: "sans-serif",
+  fontSize: 28,
+  position: "absolute",
+  bottom: "40px",
+  [side]: "50%",
+  transform: side === "left" ? "translateX(-50%)" : "translateX(50%)",
+});

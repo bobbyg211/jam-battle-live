@@ -4,7 +4,10 @@ import { BackgroundContext } from "./contexts/BackgroundContext.jsx";
 import { MatchupsProvider } from "./contexts/MatchupsContext.jsx";
 import Router from "./Router.jsx";
 
-const stageImages = import.meta.glob("/src/assets/backgrounds/*.{png,jpg,jpeg}");
+const stageImages = import.meta.glob("/src/assets/backgrounds/*.{png,jpg,jpeg}", {
+  eager: true,
+  import: "default",
+});
 
 function App() {
   return (
@@ -20,8 +23,8 @@ function App() {
 }
 
 function BackgroundProvider({ children }) {
-  const stageImagePaths = Object.keys(stageImages);
-  const location = useLocation(); // Now safely used within HashRouter
+  const stageImagePaths = Object.values(stageImages); // actual URLs now
+  const location = useLocation();
   const randomStageImage = stageImagePaths[Math.floor(Math.random() * stageImagePaths.length)];
 
   return (

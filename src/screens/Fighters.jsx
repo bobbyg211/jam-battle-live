@@ -4,13 +4,20 @@ import matchups from "../json/matchups.json";
 import randomFighter from "../assets/audio/randomizer-fighter.wav";
 import chooseCharacter from "../assets/audio/choose-character.wav";
 
+// Import all fighter images eagerly so they become valid URLs in production
+const fighterImages = import.meta.glob("../assets/fighters/*.png", {
+  eager: true,
+  import: "default",
+});
+
 export default function Fighters() {
   const { matches } = matchups;
   const location = useLocation();
   let { fighter1, fighter2, match } = location.state || {};
-  fighter1 = fighter1 || matches.match1.fighter1; // Replace with actual fighter name
-  fighter2 = fighter2 || matches.match1.fighter2; // Replace with actual fighter name
-  match = match || matches.match1.match; // Replace with actual match name
+  fighter1 = fighter1 || matches.match1.fighter1;
+  fighter2 = fighter2 || matches.match1.fighter2;
+  match = match || matches.match1.match;
+
   const [currentFighter1, setCurrentFighter1] = useState(fighter1.name);
   const [currentFighter2, setCurrentFighter2] = useState(fighter2.name);
   const [isRandomizerFinished, setIsRandomizerFinished] = useState(false);
@@ -37,55 +44,55 @@ export default function Fighters() {
       "tim-lin",
       "wave-ali",
       "zain",
-    ]; // Replace with actual fighter names
+    ];
 
-    const chooseCharacterAudio = new Audio(chooseCharacter); // Create audio object for chooseCharacter
-    chooseCharacterAudio.preload = "auto"; // Preload the audio
-    chooseCharacterAudio.autoplay = true; // Autoplay the audio
+    const chooseCharacterAudio = new Audio(chooseCharacter);
+    chooseCharacterAudio.preload = "auto";
+    chooseCharacterAudio.autoplay = true;
     chooseCharacterAudio.play().catch((err) => {
       if (err.name !== "AbortError") {
         console.error("Audio playback failed:", err);
       }
-    }); // Play the chooseCharacter sound immediately
+    });
 
-    const randomFighterAudio = new Audio(randomFighter); // Create audio object for randomFighter
+    const randomFighterAudio = new Audio(randomFighter);
     randomFighterAudio.volume = 0.5;
-    randomFighterAudio.preload = "auto"; // Preload the audio
-    randomFighterAudio.autoplay = true; // Autoplay the audio
+    randomFighterAudio.preload = "auto";
+    randomFighterAudio.autoplay = true;
     randomFighterAudio.play().catch((err) => {
       if (err.name !== "AbortError") {
         console.error("Audio playback failed:", err);
       }
-    }); // Play the randomFighter sound immediately
+    });
 
-    let interval1 = null;
-    let interval2 = null;
-
-    interval1 = window.setInterval(() => {
+    let interval1 = window.setInterval(() => {
       setCurrentFighter1(fighters[Math.floor(Math.random() * fighters.length)]);
     }, 100);
 
-    interval2 = window.setInterval(() => {
+    let interval2 = window.setInterval(() => {
       setCurrentFighter2(fighters[Math.floor(Math.random() * fighters.length)]);
     }, 100);
 
     setTimeout(() => {
-      if (interval1 !== null) clearInterval(interval1);
-      if (interval2 !== null) clearInterval(interval2);
-      setCurrentFighter1(fighter1.name); // Set to original fighter1
-      setCurrentFighter2(fighter2.name); // Set to original fighter2
-      setIsRandomizerFinished(true); // Show the link
-      randomFighterAudio.pause(); // Stop the randomFighter sound
-      randomFighterAudio.currentTime = 0; // Reset the randomFighter sound
+      clearInterval(interval1);
+      clearInterval(interval2);
+      setCurrentFighter1(fighter1.name);
+      setCurrentFighter2(fighter2.name);
+      setIsRandomizerFinished(true);
+      randomFighterAudio.pause();
+      randomFighterAudio.currentTime = 0;
     }, 5000);
 
     return () => {
-      if (interval1 !== null) clearInterval(interval1);
-      if (interval2 !== null) clearInterval(interval2);
-      randomFighterAudio.pause(); // Stop the randomFighter sound if component unmounts
-      randomFighterAudio.currentTime = 0; // Reset the randomFighter sound
+      clearInterval(interval1);
+      clearInterval(interval2);
+      randomFighterAudio.pause();
+      randomFighterAudio.currentTime = 0;
     };
   }, [fighter1, fighter2]);
+
+  // Helper to resolve the correct image URL for a fighter
+  const getFighterImage = (fighterName) => fighterImages[`../assets/fighters/${fighterName}.png`];
 
   return (
     <div className="fighters container">
@@ -93,23 +100,19 @@ export default function Fighters() {
         <h1>Choose Your Fighters</h1>
         <div className="select-fighters">
           <div className={`fighter fighter1 ${currentFighter1}`}>
-            <img src={`/src/assets/fighters/${currentFighter1}.png`} alt={currentFighter1} />
+            <img src={getFighterImage(currentFighter1)} alt={currentFighter1} />
             <h2 className="name">{currentFighter1.replace(/-/g, " ")}</h2>
             <h3 className="player player1">Player 1</h3>
           </div>
           <div className={`fighter fighter2 ${currentFighter2}`}>
-            <img src={`/src/assets/fighters/${currentFighter2}.png`} alt={currentFighter2} />
+            <img src={getFighterImage(currentFighter2)} alt={currentFighter2} />
             <h2 className="name">{currentFighter2.replace(/-/g, " ")}</h2>
             <h3 className="player player2">Player 2</h3>
           </div>
         </div>
         <Link
           to="/battle"
-          state={{
-            fighter1,
-            fighter2,
-            match,
-          }}
+          state={{ fighter1, fighter2, match }}
           className="glow-btn"
           style={{
             marginTop: "20px",
