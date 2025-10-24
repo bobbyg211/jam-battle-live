@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AssetsContext } from "../contexts/AssetsContext.jsx";
 import { Dialog, DialogContent, DialogActions, Button, TextField, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import logo from "../assets/jam-battle-logo.png";
 import localforage from "localforage";
-// import { requestPersistentStorage } from "../utils/persistence"; // Assuming you have a utility for this
 
 localforage.config({
   name: "JamBattleLive",
@@ -11,6 +11,7 @@ localforage.config({
 });
 
 export default function Setup() {
+  const { refreshAssets } = useContext(AssetsContext);
   const [open, setOpen] = useState(false);
   const [stageImage, setStageImage] = useState(null);
   const [stageName, setStageName] = useState("");
@@ -40,6 +41,7 @@ export default function Setup() {
 
   const handleStageClear = async () => {
     await localforage.removeItem("stage");
+    refreshAssets(); // ✅ Refresh after clear
     setStageName("");
     setStageImage(null);
     setStagePreview(null);
@@ -47,6 +49,7 @@ export default function Setup() {
 
   const handleStageSave = async () => {
     await localforage.setItem("stage", { name: stageName, image: stageImage });
+    refreshAssets(); // ✅ Refresh after save
     setOpen(false);
   };
 
@@ -66,17 +69,16 @@ export default function Setup() {
   const handleMatchSetupOpen = async (matchNumber) => {
     const matchData = await localforage.getItem(`match_${matchNumber}`);
     if (matchData) {
-      // Patch avatarPreview for both players if avatar exists
-      const patchedPlayer1 =
+      setPlayer1(
         matchData.player1 && matchData.player1.avatar
           ? { ...matchData.player1, avatarPreview: URL.createObjectURL(matchData.player1.avatar) }
-          : { ...matchData.player1 };
-      const patchedPlayer2 =
+          : { ...matchData.player1 }
+      );
+      setPlayer2(
         matchData.player2 && matchData.player2.avatar
           ? { ...matchData.player2, avatarPreview: URL.createObjectURL(matchData.player2.avatar) }
-          : { ...matchData.player2 };
-      setPlayer1(patchedPlayer1);
-      setPlayer2(patchedPlayer2);
+          : { ...matchData.player2 }
+      );
     } else {
       setPlayer1({ name: "", insta: "", introSong: null, avatar: null, avatarPreview: null });
       setPlayer2({ name: "", insta: "", introSong: null, avatar: null, avatarPreview: null });
@@ -98,10 +100,9 @@ export default function Setup() {
   const handlePlayerAvatarChange = (player, e) => {
     const file = e.target.files[0];
     if (file) {
-      if (player === 1)
-        setPlayer1((prev) => ({ ...prev, avatar: file, avatarPreview: URL.createObjectURL(file) }));
-      else
-        setPlayer2((prev) => ({ ...prev, avatar: file, avatarPreview: URL.createObjectURL(file) }));
+      const preview = URL.createObjectURL(file);
+      if (player === 1) setPlayer1((prev) => ({ ...prev, avatar: file, avatarPreview: preview }));
+      else setPlayer2((prev) => ({ ...prev, avatar: file, avatarPreview: preview }));
     } else {
       if (player === 1) setPlayer1((prev) => ({ ...prev, avatar: null, avatarPreview: null }));
       else setPlayer2((prev) => ({ ...prev, avatar: null, avatarPreview: null }));
@@ -119,6 +120,7 @@ export default function Setup() {
       player1,
       player2,
     });
+    refreshAssets(); // ✅ Refresh after save
     setOpenMatchDialog(false);
     setSelectedMatch(null);
     setPlayer1({ name: "", insta: "", introSong: null, avatar: null, avatarPreview: null });
@@ -128,18 +130,17 @@ export default function Setup() {
 
   const handleMatchSetupClear = async () => {
     await localforage.removeItem(`match_${selectedMatch}`);
+    refreshAssets(); // ✅ Refresh after clear
     setPlayer1({ name: "", insta: "", introSong: null, avatar: null, avatarPreview: null });
     setPlayer2({ name: "", insta: "", introSong: null, avatar: null, avatarPreview: null });
     fetchMatchups();
   };
 
-  // Helper to fetch all matchups
   const fetchMatchups = async () => {
     const newMatchups = {};
     for (let i = 1; i <= 4; i++) {
       const data = await localforage.getItem(`match_${i}`);
       if (data) {
-        // Patch avatarPreview for both players if avatar exists
         const patchedPlayer1 =
           data.player1 && data.player1.avatar
             ? { ...data.player1, avatarPreview: URL.createObjectURL(data.player1.avatar) }
@@ -157,7 +158,6 @@ export default function Setup() {
   useEffect(() => {
     const fetchStage = async () => {
       const stage = await localforage.getItem("stage");
-
       if (stage) {
         setStageName(stage.name);
         setStageImage(stage.image);

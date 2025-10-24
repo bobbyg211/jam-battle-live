@@ -1,29 +1,34 @@
 import { Link } from "react-router";
-import { useEffect, useState } from "react";
-import randomizerStageAudio from "../assets/audio/randomizer-stage.wav";
-
-// Import all stage images eagerly as URLs
-const stageImages = import.meta.glob("../assets/stages/*.{jpg,jpeg,png}", {
-  eager: true,
-  import: "default",
-});
+import { useEffect, useState, useContext } from "react";
+import { AssetsContext } from "../contexts/AssetsContext.jsx";
+import localforage from "localforage";
 
 export default function Stages() {
-  // Match each stage title to its corresponding imported image
-  const stages = [
-    { title: "Mt. Everest", img: stageImages["../assets/stages/mt-everest.jpg"] },
-    { title: "Saturn", img: stageImages["../assets/stages/saturn.jpg"] },
-    { title: "McKibbin Lofts", img: stageImages["../assets/stages/mckibbin-lofts.jpg"] },
-    { title: "Amazon Rainforest", img: stageImages["../assets/stages/amazon-rainforest.jpg"] },
-    { title: "Sahara Desert", img: stageImages["../assets/stages/sahara-desert.jpg"] },
-    { title: "Bermuda Triangle", img: stageImages["../assets/stages/bermuda-triangle.jpg"] },
-  ];
-
+  const { assets } = useContext(AssetsContext);
   const [highlightedIndex, setHighlightedIndex] = useState(null);
+  const [customStageName, setCustomStageName] = useState(null);
 
   useEffect(() => {
+    localforage.getItem("stage").then((stage) => {
+      if (stage && stage.name) setCustomStageName(stage.name);
+    });
+  }, []);
+
+  // Build the full stage list with static and dynamic assets
+  const stages = [
+    { title: "Mt. Everest", img: assets["stages/mt-everest.jpg"] },
+    { title: "Saturn", img: assets["stages/saturn.jpg"] },
+    { title: customStageName, img: assets["stage"] }, // dynamic from localForage
+    { title: "Amazon Rainforest", img: assets["stages/amazon-rainforest.jpg"] },
+    { title: "Sahara Desert", img: assets["stages/sahara-desert.jpg"] },
+    { title: "Bermuda Triangle", img: assets["stages/bermuda-triangle.jpg"] },
+  ];
+
+  useEffect(() => {
+    if (!assets["audio/randomizer-stage.wav"]) return;
+
     let elapsed = 0;
-    const audio = new Audio(randomizerStageAudio);
+    const audio = new Audio(assets["audio/randomizer-stage.wav"]);
     audio.preload = "auto";
     audio.loop = true;
     audio.play().catch((err) => {
@@ -35,7 +40,7 @@ export default function Stages() {
     const interval = setInterval(() => {
       elapsed += 200;
       if (elapsed >= 7000) {
-        setHighlightedIndex(2); // Always end on "McKibbin Lofts"
+        setHighlightedIndex(2); // Always end on custom stage
         clearInterval(interval);
         audio.pause();
         audio.currentTime = 0;
@@ -53,9 +58,7 @@ export default function Stages() {
       audio.pause();
       audio.currentTime = 0;
     };
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [assets]);
 
   return (
     <div className="stages container">
