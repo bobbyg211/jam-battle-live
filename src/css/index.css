@@ -1,11 +1,219 @@
 @font-face {
   font-family: "FIGHTING FORCE";
-  src: url("./fonts/FIGHTINGFORCE.eot");
-  src: url("./fonts/FIGHTINGFORCE.eot?#iefix") format("embedded-opentype"),
-    url("./fonts/FIGHTINGFORCE.woff2") format("woff2"),
-    url("./fonts/FIGHTINGFORCE.woff") format("woff"),
-    url("./fonts/FIGHTINGFORCE.ttf") format("truetype"),
-    url("./fonts/FIGHTINGFORCE.svg#FIGHTINGFORCE") format("svg");
+  src: url("./fonts/fightingforce/FIGHTINGFORCE.eot");
+  src: url("./fonts/fightingforce/FIGHTINGFORCE.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/fightingforce/FIGHTINGFORCE.woff2") format("woff2"),
+    url("./fonts/fightingforce/FIGHTINGFORCE.woff") format("woff"),
+    url("./fonts/fightingforce/FIGHTINGFORCE.ttf") format("truetype"),
+    url("./fonts/fightingforce/FIGHTINGFORCE.svg#FIGHTINGFORCE") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VT323";
+  src: url("./fonts/vt323/VT323-Regular.eot");
+  src: url("./fonts/vt323/VT323-Regular.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/vt323/VT323-Regular.woff2") format("woff2"),
+    url("./fonts/vt323/VT323-Regular.woff") format("woff"),
+    url("./fonts/vt323/VT323-Regular.ttf") format("truetype"),
+    url("./fonts/vt323/VT323-Regular.svg#VT323-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VTC Spike";
+  src: url("./fonts/vtcspike/VTCSpike-ExtraBold.eot");
+  src: url("./fonts/vtcspike/VTCSpike-ExtraBold.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/vtcspike/VTCSpike-ExtraBold.woff2") format("woff2"),
+    url("./fonts/vtcspike/VTCSpike-ExtraBold.woff") format("woff"),
+    url("./fonts/vtcspike/VTCSpike-ExtraBold.ttf") format("truetype"),
+    url("./fonts/vtcspike/VTCSpike-ExtraBold.svg#VTCSpike-ExtraBold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VTC Spike";
+  src: url("./fonts/vtcspike/VTCSpike-Light.eot");
+  src: url("./fonts/vtcspike/VTCSpike-Light.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/vtcspike/VTCSpike-Light.woff2") format("woff2"),
+    url("./fonts/vtcspike/VTCSpike-Light.woff") format("woff"),
+    url("./fonts/vtcspike/VTCSpike-Light.ttf") format("truetype"),
+    url("./fonts/vtcspike/VTCSpike-Light.svg#VTCSpike-Light") format("svg");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VTC Spike";
+  src: url("VTCSpike-SemiBold.eot");
+  src: url("./fonts/vtcspike/VTCSpike-SemiBold.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/vtcspike/VTCSpike-SemiBold.woff2") format("woff2"),
+    url("./fonts/vtcspike/VTCSpike-SemiBold.woff") format("woff"),
+    url("./fonts/vtcspike/VTCSpike-SemiBold.ttf") format("truetype"),
+    url("./fonts/vtcspike/VTCSpike-SemiBold.svg#VTCSpike-SemiBold") format("svg");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VTC Spike";
+  src: url("VTCSpike-Bold.eot");
+  src: url("./fonts/vtcspike/VTCSpike-Bold.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/vtcspike/VTCSpike-Bold.woff2") format("woff2"),
+    url("./fonts/vtcspike/VTCSpike-Bold.woff") format("woff"),
+    url("./fonts/vtcspike/VTCSpike-Bold.ttf") format("truetype"),
+    url("./fonts/vtcspike/VTCSpike-Bold.svg#VTCSpike-Bold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VTC Spike";
+  src: url("./fonts/vtcspike/VTCSpike-Medium.eot");
+  src: url("./fonts/vtcspike/VTCSpike-Medium.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/vtcspike/VTCSpike-Medium.woff2") format("woff2"),
+    url("./fonts/vtcspike/VTCSpike-Medium.woff") format("woff"),
+    url("./fonts/vtcspike/VTCSpike-Medium.ttf") format("truetype"),
+    url("./fonts/vtcspike/VTCSpike-Medium.svg#VTCSpike-Medium") format("svg");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VTC Spike";
+  src: url("./fonts/vtcspike/VTCSpike-Regular.eot");
+  src: url("./fonts/vtcspike/VTCSpike-Regular.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/vtcspike/VTCSpike-Regular.woff2") format("woff2"),
+    url("./fonts/vtcspike/VTCSpike-Regular.woff") format("woff"),
+    url("./fonts/vtcspike/VTCSpike-Regular.ttf") format("truetype"),
+    url("./fonts/vtcspike/VTCSpike-Regular.svg#VTCSpike-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VTC Spike";
+  src: url("./fonts/vtcspike/VTCSpike-Black.eot");
+  src: url("./fonts/vtcspike/VTCSpike-Black.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/vtcspike/VTCSpike-Black.woff2") format("woff2"),
+    url("./fonts/vtcspike/VTCSpike-Black.woff") format("woff"),
+    url("./fonts/vtcspike/VTCSpike-Black.ttf") format("truetype"),
+    url("./fonts/vtcspike/VTCSpike-Black.svg#VTCSpike-Black") format("svg");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VTC Spike";
+  src: url("./fonts/vtcspike/VTCSpike-Black_1.eot");
+  src: url("./fonts/vtcspike/VTCSpike-Black_1.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/vtcspike/VTCSpike-Black_1.woff2") format("woff2"),
+    url("./fonts/vtcspike/VTCSpike-Black_1.woff") format("woff"),
+    url("./fonts/vtcspike/VTCSpike-Black_1.ttf") format("truetype"),
+    url("./fonts/vtcspike/VTCSpike-Black_1.svg#VTCSpike-Black") format("svg");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VTC Spike";
+  src: url("./fonts/vtcspike/VTCSpike-Bold_1.eot");
+  src: url("./fonts/vtcspike/VTCSpike-Bold_1.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/vtcspike/VTCSpike-Bold_1.woff2") format("woff2"),
+    url("./fonts/vtcspike/VTCSpike-Bold_1.woff") format("woff"),
+    url("./fonts/vtcspike/VTCSpike-Bold_1.ttf") format("truetype"),
+    url("./fonts/vtcspike/VTCSpike-Bold_1.svg#VTCSpike-Bold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VTC Spike";
+  src: url("./fonts/vtcspike/VTCSpike-Medium_1.eot");
+  src: url("./fonts/vtcspike/VTCSpike-Medium_1.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/vtcspike/VTCSpike-Medium_1.woff2") format("woff2"),
+    url("./fonts/vtcspike/VTCSpike-Medium_1.woff") format("woff"),
+    url("./fonts/vtcspike/VTCSpike-Medium_1.ttf") format("truetype"),
+    url("./fonts/vtcspike/VTCSpike-Medium_1.svg#VTCSpike-Medium") format("svg");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VTC Spike";
+  src: url("./fonts/vtcspike/VTCSpike-Light_1.eot");
+  src: url("./fonts/vtcspike/VTCSpike-Light_1.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/vtcspike/VTCSpike-Light_1.woff2") format("woff2"),
+    url("./fonts/vtcspike/VTCSpike-Light_1.woff") format("woff"),
+    url("./fonts/vtcspike/VTCSpike-Light_1.ttf") format("truetype"),
+    url("./fonts/vtcspike/VTCSpike-Light_1.svg#VTCSpike-Light") format("svg");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VTC Spike";
+  src: url("./fonts/vtcspike/VTCSpike-Regular_1.eot");
+  src: url("./fonts/vtcspike/VTCSpike-Regular_1.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/vtcspike/VTCSpike-Regular_1.woff2") format("woff2"),
+    url("./fonts/vtcspike/VTCSpike-Regular_1.woff") format("woff"),
+    url("./fonts/vtcspike/VTCSpike-Regular_1.ttf") format("truetype"),
+    url("./fonts/vtcspike/VTCSpike-Regular_1.svg#VTCSpike-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VTC Spike";
+  src: url("./fonts/vtcspike/VTCSpike-ExtraBold_1.eot");
+  src: url("./fonts/vtcspike/VTCSpike-ExtraBold_1.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/vtcspike/VTCSpike-ExtraBold_1.woff2") format("woff2"),
+    url("./fonts/vtcspike/VTCSpike-ExtraBold_1.woff") format("woff"),
+    url("./fonts/vtcspike/VTCSpike-ExtraBold_1.ttf") format("truetype"),
+    url("./fonts/vtcspike/VTCSpike-ExtraBold_1.svg#VTCSpike-ExtraBold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VTC Spike";
+  src: url("./fonts/vtcspike/VTCSpike-SemiBold_1.eot");
+  src: url("./fonts/vtcspike/VTCSpike-SemiBold_1.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/vtcspike/VTCSpike-SemiBold_1.woff2") format("woff2"),
+    url("./fonts/vtcspike/VTCSpike-SemiBold_1.woff") format("woff"),
+    url("./fonts/vtcspike/VTCSpike-SemiBold_1.ttf") format("truetype"),
+    url("./fonts/vtcspike/VTCSpike-SemiBold_1.svg#VTCSpike-SemiBold") format("svg");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VTC Spike VF";
+  src: url("VTCSpikeVF-Regular.eot");
+  src: url("./fonts/vtcspike/VTCSpikeVF-Regular.eot?#iefix") format("embedded-opentype"),
+    url("./fonts/vtcspike/VTCSpikeVF-Regular.woff2") format("woff2"),
+    url("./fonts/vtcspike/VTCSpikeVF-Regular.woff") format("woff"),
+    url("./fonts/vtcspike/VTCSpikeVF-Regular.ttf") format("truetype"),
+    url("./fonts/vtcspike/VTCSpikeVF-Regular.svg#VTCSpikeVF-Regular") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -18,7 +226,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "FIGHTING FORCE", sans-serif;
+  font-family: "VT323", sans-serif;
   background: black;
   color: white;
   overflow: hidden;
@@ -29,18 +237,21 @@ h2,
 h3,
 h4,
 h5,
-h6,
+h6 {
+  font-family: "VTC Spike", sans-serif;
+}
+
 p,
 li,
 a,
-button {
-  font-family: "FIGHTING FORCE", sans-serif;
+button,
+label {
+  font-family: "VT323", monospace !important;
+  font-size: 18px !important;
 }
 
 h1 {
-  color: #ff5053;
   text-align: center;
-  text-shadow: 0px 0.654px 16.342px rgba(255, 55, 48, 0.79);
   font-size: 40px;
   font-style: normal;
   font-weight: 400;
@@ -51,7 +262,6 @@ h1 {
 
 h2 {
   text-align: center;
-  text-shadow: 0px 0.654px 16.342px rgba(255, 55, 48, 0.79);
   font-size: 30px;
   font-style: normal;
   font-weight: 400;
@@ -62,7 +272,6 @@ h2 {
 
 h3 {
   text-align: center;
-  text-shadow: 0px 0.654px 16.342px rgba(255, 55, 48, 0.79);
   font-size: 30px;
   font-style: normal;
   font-weight: 400;
@@ -71,15 +280,11 @@ h3 {
   text-transform: uppercase;
 }
 
-p {
-  font-family: monospace;
-}
-
 #main {
   height: 100vh;
   width: 100%;
-  background-size: "cover";
-  background-position: "center";
+  /* background-size: "cover";
+  background-position: "center"; */
 }
 
 #main::before {
@@ -124,6 +329,11 @@ p {
   display: block;
   margin-top: 20px;
   font-size: 50px;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 /* Buttons  */
@@ -208,23 +418,571 @@ p {
   }
 }
 
-/* Start */
+/* Control Panel */
 
-.start .video-overlay {
+.control-panel {
+  background: black;
+}
+
+.control-panel .pill-btn {
+  background: transparent !important;
+  border: 3px solid white !important;
+  color: white !important;
+  border-radius: 50px !important;
+  position: relative;
+}
+
+.control-panel .pill-btn::before,
+.control-panel .pill-btn::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  border: 3px solid white;
+  border-radius: 50px;
+  background: transparent;
+  height: 100%;
+  width: calc(100% + 0px);
+  transition: all 0.3s ease;
+}
+
+.control-panel .pill-btn:hover::before {
+  left: -13px;
+  width: calc(100% + 20px);
+}
+
+.control-panel .pill-btn:hover::after {
+  left: -23px;
+  width: calc(100% + 40px);
+}
+
+.control-panel .pill-btn.purple {
+  border: 3px solid #ac8df2 !important;
+  color: #ac8df2 !important;
+}
+
+.control-panel .pill-btn.purple::before,
+.control-panel .pill-btn.purple::after {
+  border: 3px solid #ac8df2;
+}
+
+.control-panel .pill-btn.blue {
+  border: 3px solid #99dbed !important;
+  color: #99dbed !important;
+}
+
+.control-panel .pill-btn.blue::before,
+.control-panel .pill-btn.blue::after {
+  border: 3px solid #99dbed;
+}
+
+.control-panel .pill-btn.green {
+  border: 3px solid #9febc9 !important;
+  color: #9febc9 !important;
+}
+
+.control-panel .pill-btn.green::before,
+.control-panel .pill-btn.green::after {
+  border: 3px solid #9febc9;
+}
+
+.control-panel .accents .tl-curve svg {
   position: fixed;
+  top: 0;
+  left: -50px;
+  z-index: 1;
+  height: 250px;
+}
+
+.control-panel .accents .br-curve svg {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  height: 150px;
+}
+
+.control-panel .accents .logo svg {
+  position: fixed;
+  z-index: 3;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-height: 75px;
+}
+
+.control-panel .dashboard {
+  position: fixed;
+  z-index: 2;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95vw;
+  height: calc(100vh - 80px);
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 110px 20px 20px 20px;
+}
+
+.control-panel .dashboard .menu .icon {
+  position: absolute;
+  top: 20px;
+  z-index: 2;
+  color: white;
+}
+
+.control-panel .dashboard .menu .icon.bracket {
+  left: 20px;
+}
+
+.control-panel .dashboard .menu .icon.settings {
+  right: 20px;
+}
+
+.control-panel .dashboard .menu .icon svg {
+  height: 35px;
+  width: auto;
+}
+
+.control-panel .dashboard .controls {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.control-panel .dashboard .controls .main-panel {
+  flex: 2;
+  display: flex;
+}
+
+.control-panel .dashboard .controls .main-panel .matchup-controls {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.control-panel .dashboard .controls .main-panel .matchup-controls .player {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.control-panel .dashboard .controls .main-panel .matchup-controls .player .character {
+  flex: 1;
+  border: 2px solid white;
+  border-radius: 10px;
+  display: block;
+  background: rgba(0, 0, 0, 0.6);
+  background-size: cover;
+  padding: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.control-panel
+  .dashboard
+  .controls
+  .main-panel
+  .matchup-controls
+  .player
+  .character
+  .character-name {
+  position: relative;
+  z-index: 1;
+}
+
+.control-panel .dashboard .controls .main-panel .matchup-controls .player .character::before {
+  content: "";
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  z-index: 99999;
-  opacity: 0;
-  transition: opacity 2s ease;
-  pointer-events: none; /* Prevent interaction when not active */
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+  border-radius: 10px;
 }
 
-.start .video-overlay.active {
+.control-panel .dashboard .controls .main-panel .matchup-controls .player .character .select {
+  position: absolute;
+  top: 60%;
+  transform: translateY(20px);
+  transition: all 0.2s ease;
+  opacity: 0;
+}
+
+.control-panel .dashboard .controls .main-panel .matchup-controls .player .character:hover .select {
+  transform: translateY(0px);
   opacity: 1;
+}
+
+.control-panel .dashboard .controls .main-panel .matchup-controls .player .winner,
+.control-panel .dashboard .controls .main-panel .matchup-controls .player .play-intro {
+  align-self: center;
+}
+
+.control-panel .dashboard .controls .main-panel .matchup-controls .player .winner {
+  position: absolute;
+  transform: translateY(calc(-100% - 20px));
+}
+
+.control-panel .dashboard .controls .main-panel .matchup-controls .vs {
+  padding: 0 35px;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-35px);
+}
+
+.control-panel .dashboard .controls .main-panel .slide-controls,
+.control-panel .dashboard .controls .main-panel .screen-controls {
+  flex: 1;
+}
+
+.control-panel .dashboard .controls .main-panel .slide-controls > div {
+  flex: 0 0 calc(33.33% - 25px);
+}
+
+.control-panel .dashboard .controls .main-panel .screen-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+}
+
+.control-panel .dashboard .controls .main-panel .screen-controls button {
+  margin: 0 65px;
+  font-size: 24px !important;
+}
+
+.control-panel .dashboard .controls .sub-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 50px;
+}
+
+.control-panel .dashboard .controls .sub-panel .coin-controls,
+.control-panel .dashboard .controls .sub-panel .timer-controls {
+  flex: 1 0 15%;
+}
+
+.control-panel .dashboard .controls .sub-panel .coin-controls {
+  margin-bottom: 20px;
+}
+
+.control-panel .dashboard .controls .sub-panel .genre-controls {
+  margin: 20px 100px;
+  width: 100%;
+  display: flex;
+  height: 100%;
+  gap: 10px;
+  border: 3px solid white;
+  border-radius: 10px;
+  padding: 20px 40px;
+}
+
+.control-panel .dashboard .controls .sub-panel .genre-controls .genre,
+.control-panel .dashboard .controls .sub-panel .genre-controls .key {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.control-panel .dashboard .controls .sub-panel .genre-controls .genre label,
+.control-panel .dashboard .controls .sub-panel .genre-controls .key label {
+  color: white;
+}
+
+.control-panel .dashboard .controls .sub-panel .genre-controls .genre .genre-display,
+.control-panel .dashboard .controls .sub-panel .genre-controls .key .key-display {
+  margin: auto 0;
+  text-align: center;
+  font-weight: 600;
+  font-size: 60px !important;
+}
+
+.control-panel .dashboard .controls .sub-panel .genre-controls .genre .genre-display {
+  font-family: "VTC Spike";
+  padding: 12px 50px 0 50px;
+  font-weight: 300;
+  letter-spacing: 4px;
+  background: transparent !important;
+  border: 5px solid white !important;
+  color: white !important;
+  border-radius: 50px !important;
+  position: relative;
+}
+
+.control-panel .dashboard .controls .sub-panel .genre-controls .genre .genre-display::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -25px;
+  border: 5px solid white;
+  border-radius: 50px;
+  background: transparent;
+  height: 100%;
+  width: calc(100% + 40px);
+}
+
+.control-panel .dashboard .controls .sub-panel .timer-controls {
+  margin-left: auto;
+}
+
+.control-panel .dashboard .controls .sub-panel .timer-controls .record {
+  position: relative;
+}
+
+.control-panel .dashboard .controls .sub-panel .timer-controls .record .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: conic-gradient(
+    black 0deg 100deg,
+    white 100deg 145deg,
+    black 145deg 290deg,
+    white 290deg 320deg,
+    black 320deg 360deg
+  );
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 4px),
+    black calc(100% - 4px)
+  );
+  mask: radial-gradient(farthest-side, transparent calc(100% - 4px), black calc(100% - 4px));
+  animation: rotate-circle 6s linear infinite;
+  animation-play-state: paused;
+}
+
+.control-panel .dashboard .controls .sub-panel .timer-controls .record.active .circle {
+  animation-play-state: running;
+}
+
+@keyframes rotate-circle {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.control-panel .dashboard .controls .sub-panel .timer-controls .record .vinyl {
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  border: 3px solid white;
+  border-radius: 50%;
+}
+
+.control-panel .dashboard .controls .sub-panel .timer-controls .record .tonearm {
+  position: absolute;
+  top: 70%;
+  right: -50px;
+  transform: translateY(-50%) rotate(0deg);
+  height: 250px;
+  width: auto;
+  transform-origin: 65% 0%;
+  transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.control-panel .dashboard .controls .sub-panel .timer-controls .record.active .tonearm {
+  transform: translateY(-50%) rotate(25deg);
+}
+
+.control-panel .dashboard .controls .sub-panel .timer-controls .record .clock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 45px;
+  margin: 0;
+  color: black;
+  pointer-events: none;
+  text-shadow: none;
+  padding-left: 4px;
+}
+
+.control-panel .dashboard .controls .sub-panel .timer-controls .play-restart .icon {
+  color: white;
+}
+
+.control-panel .dashboard .controls .sub-panel .timer-controls .play-restart .icon svg {
+  width: auto;
+  height: 50px;
+}
+
+/* Bracket Setup */
+
+.bracket-setup .control svg {
+  position: fixed;
+  z-index: 999;
+  top: 20px;
+  right: 30px;
+  color: white;
+  width: auto;
+  height: 40px;
+}
+
+.bracket-setup .logo svg {
+  position: fixed;
+  z-index: 3;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-height: 75px;
+}
+
+.bracket-setup .content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 1500px;
+}
+
+.bracket-setup .content .characters {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 100px;
+}
+
+.bracket-setup .content .characters .character-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.bracket-setup .content .characters .character-list .character {
+  position: relative;
+  flex: 1;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.bracket-setup .content .characters .character-list .character .char-card {
+  border: 2px solid white;
+  border-radius: 10px;
+  width: 175px;
+  height: 100px;
+  display: block;
+  background: rgba(0, 0, 0, 0.6);
+  margin: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.bracket-setup .content .characters .character-list .character .char-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+  border-radius: 10px;
+}
+
+.bracket-setup .content .characters .character-list .character .char-card h3 {
+  position: relative;
+  z-index: 1;
+  font-size: 24px;
+}
+
+.bracket-setup .content .characters .character-list .character .setup-btn {
+  opacity: 0;
+  pointer-events: none;
+  padding: 15px;
+  position: absolute;
+  z-index: 2;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, 20%);
+}
+
+.bracket-setup .content .characters .character-list .character:hover .setup-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0%);
+}
+
+.bracket-setup .content .stages .stage {
+  border: 2px solid white;
+  border-radius: 10px;
+  width: 450px;
+  height: 300px;
+  display: block;
+  background: rgba(0, 0, 0, 0.6);
+  margin: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.bracket-setup .content .stages .stage::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.bracket-setup .content .stages .stage .stage-btn {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -35%);
+}
+
+.bracket-setup .content .stages .stage:hover .stage-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+}
+
+.bracket-setup .content .stages .stage .stage-name {
+  position: relative;
+  z-index: 2;
+}
+
+.dialog h3 {
+  text-align: left;
+  margin: 0;
+  text-shadow: none;
 }
 
 /* Home */
@@ -968,125 +1726,4 @@ p {
   opacity: 1;
   pointer-events: auto;
   transform: translate(-50%, -50%);
-}
-
-/* Setup */
-
-.setup .logo {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 200px;
-}
-
-.setup .content {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-}
-
-.setup .content .matchups .rounds {
-  display: flex;
-  align-items: center;
-}
-
-.setup .content .matchups .rounds .column .match {
-  position: relative;
-}
-
-.setup .content .matchups .rounds .column.initial .match {
-  margin-bottom: 40px;
-}
-
-.setup .content .matchups .rounds .column .match .fighter {
-  border: 2px solid white;
-  border-radius: 10px;
-  width: 175px;
-  height: 100px;
-  display: block;
-  background: rgba(0, 0, 0, 0.6);
-  margin: 20px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.setup .content .matchups .rounds .column .match .fighter h3 {
-  font-size: 24px;
-}
-
-.setup .content .matchups .rounds .column .match .setup-btn {
-  opacity: 0;
-  pointer-events: none;
-  padding: 15px;
-  position: absolute;
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 20%);
-}
-
-.setup .content .matchups .rounds .column .match:hover .setup-btn {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, 0%);
-}
-
-.setup .content .stages .stage {
-  border: 2px solid white;
-  border-radius: 10px;
-  width: 450px;
-  height: 300px;
-  display: block;
-  background: rgba(0, 0, 0, 0.6);
-  margin: 20px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.setup .content .stages .stage::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-  border-radius: 10px;
-}
-
-.setup .content .stages .stage .stage-btn {
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -35%);
-}
-
-.setup .content .stages .stage:hover .stage-btn {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, -50%);
-}
-
-.setup .content .stages .stage .stage-name {
-  position: relative;
-  z-index: 2;
-}
-
-.dialog h3 {
-  text-align: left;
-  margin: 0;
-  text-shadow: none;
 }

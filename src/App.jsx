@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { HashRouter } from "react-router";
-import GlobalNav from "./components/GlobalNav.jsx";
 import Router from "./Router.jsx";
+import { StorageProvider } from "./contexts/StorageContext.jsx";
 import { AssetsProvider, AssetsContext } from "./contexts/AssetsContext.jsx";
-import { BackgroundProvider } from "./contexts/BackgroundContext.jsx";
 import { CircularProgress } from "@mui/material";
-import { useContext } from "react";
+import { schema } from "./utils/schema.js";
 
 function AppContent() {
   const { ready } = useContext(AssetsContext);
@@ -41,12 +40,9 @@ function AppContent() {
   }
 
   return (
-    <>
-      <GlobalNav />
-      <BackgroundProvider>
-        <Router />
-      </BackgroundProvider>
-    </>
+    <StorageProvider schema={schema}>
+      <Router />
+    </StorageProvider>
   );
 }
 
