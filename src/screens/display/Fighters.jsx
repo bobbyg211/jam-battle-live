@@ -1,20 +1,48 @@
 import { useState, useEffect, useContext, useMemo } from "react";
-import { Link, useLocation } from "react-router";
-import { AssetsContext } from "../contexts/AssetsContext.jsx";
-import matchups from "../json/matchups.json";
+import { StorageContext } from "../../contexts/StorageContext.jsx";
+import { AssetsContext } from "../../contexts/AssetsContext.jsx";
 
 export default function Fighters() {
   const { assets } = useContext(AssetsContext);
-  const { matches } = matchups;
-  const location = useLocation();
-  let { fighter1, fighter2, match } = location.state || {};
-  fighter1 = fighter1 || matches.match1.fighter1;
-  fighter2 = fighter2 || matches.match1.fighter2;
-  match = match || 1;
+  const { data, getValue } = useContext(StorageContext);
+  const [activeFighters, setActiveFighters] = useState({});
 
-  const [currentFighter1, setCurrentFighter1] = useState(fighter1.name);
-  const [currentFighter2, setCurrentFighter2] = useState(fighter2.name);
-  const [isRandomizerFinished, setIsRandomizerFinished] = useState(false);
+  useEffect(() => {
+    const fetchActiveFighters = async () => {
+      const availableFighters = await getValue("characters");
+      const activeFighters = await getValue("activeFighters");
+      let fighter1Obj = activeFighters?.fighter1
+        ? Object.values(availableFighters).find((f) => f.id === activeFighters.fighter1)
+        : null;
+
+      let fighter2Obj = activeFighters?.fighter2
+        ? Object.values(availableFighters).find((f) => f.id === activeFighters.fighter2)
+        : null;
+
+      // Generate new blobs for avatarPreview if avatar exists and is a Blob
+      if (
+        fighter1Obj &&
+        fighter1Obj.avatar &&
+        typeof fighter1Obj.avatar === "object" &&
+        fighter1Obj.avatar instanceof Blob
+      ) {
+        fighter1Obj = { ...fighter1Obj, avatarPreview: URL.createObjectURL(fighter1Obj.avatar) };
+      }
+      if (
+        fighter2Obj &&
+        fighter2Obj.avatar &&
+        typeof fighter2Obj.avatar === "object" &&
+        fighter2Obj.avatar instanceof Blob
+      ) {
+        fighter2Obj = { ...fighter2Obj, avatarPreview: URL.createObjectURL(fighter2Obj.avatar) };
+      }
+      setActiveFighters({ fighter1: fighter1Obj, fighter2: fighter2Obj });
+    };
+    fetchActiveFighters();
+  }, [data]);
+
+  const [currentFighter1, setCurrentFighter1] = useState(activeFighters.fighter1);
+  const [currentFighter2, setCurrentFighter2] = useState(activeFighters.fighter2);
 
   // Memoize fighter image map from assets
   const imagesByName = useMemo(() => {
@@ -71,9 +99,8 @@ export default function Fighters() {
     setTimeout(() => {
       clearInterval(interval1);
       clearInterval(interval2);
-      setCurrentFighter1(fighter1.name);
-      setCurrentFighter2(fighter2.name);
-      setIsRandomizerFinished(true);
+      setCurrentFighter1(activeFighters.fighter1);
+      setCurrentFighter2(activeFighters.fighter2);
       randomFighterAudio.pause();
       randomFighterAudio.currentTime = 0;
     }, 5000);
@@ -84,7 +111,7 @@ export default function Fighters() {
       randomFighterAudio.pause();
       randomFighterAudio.currentTime = 0;
     };
-  }, [assets, fighter1.name, fighter2.name, imagesByName]);
+  }, [assets, activeFighters.fighter1, activeFighters.fighter2, imagesByName]);
 
   return (
     <div className="fighters container">
@@ -92,28 +119,24 @@ export default function Fighters() {
         <h1>Choose Your Fighters</h1>
         <div className="select-fighters">
           <div className={`fighter fighter1 ${currentFighter1}`}>
-            <img key={currentFighter1} src={imagesByName[currentFighter1]} alt={currentFighter1} />
-            <h2 className="name">{currentFighter1.replace(/-/g, " ")}</h2>
+            <img
+              key={currentFighter1?.name || currentFighter1}
+              src={currentFighter1?.avatarPreview || imagesByName[currentFighter1]}
+              alt={currentFighter1?.name || currentFighter1}
+            />
+            <h2 className="name">{currentFighter1?.name || currentFighter1?.replace(/-/g, " ")}</h2>
             <h3 className="player player1">Player 1</h3>
           </div>
           <div className={`fighter fighter2 ${currentFighter2}`}>
-            <img key={currentFighter2} src={imagesByName[currentFighter2]} alt={currentFighter2} />
-            <h2 className="name">{currentFighter2.replace(/-/g, " ")}</h2>
+            <img
+              key={currentFighter2?.name || currentFighter2}
+              src={currentFighter2?.avatarPreview || imagesByName[currentFighter2]}
+              alt={currentFighter2?.name || currentFighter2}
+            />
+            <h2 className="name">{currentFighter2?.name || currentFighter2?.replace(/-/g, " ")}</h2>
             <h3 className="player player2">Player 2</h3>
           </div>
         </div>
-        <Link
-          to="/battle"
-          state={{ fighter1, fighter2, match }}
-          className="glow-btn"
-          style={{
-            marginTop: "20px",
-            opacity: isRandomizerFinished ? 1 : 0,
-            pointerEvents: isRandomizerFinished ? "auto" : "none",
-          }}
-        >
-          Confirm
-        </Link>
       </div>
     </div>
   );

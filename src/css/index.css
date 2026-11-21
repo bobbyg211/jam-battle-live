@@ -1,3 +1,5 @@
+/* ============== Fonts ==============  */
+
 @font-face {
   font-family: "FIGHTING FORCE";
   src: url("./fonts/fightingforce/FIGHTINGFORCE.eot");
@@ -219,6 +221,10 @@
   font-display: swap;
 }
 
+/* ============== General ==============  */
+
+/* Typography */
+
 * {
   box-sizing: border-box;
 }
@@ -400,7 +406,7 @@ h3 {
   text-transform: uppercase;
   background: none;
   border: none;
-  cursor: pointer;
+  cursor: default;
   padding: 0;
   margin: 20px 0 0 0;
   animation: fadeInOut 1.5s infinite;
@@ -418,13 +424,13 @@ h3 {
   }
 }
 
-/* Control Panel */
+/* ============== Control Panel ============== */
 
 .control-panel {
   background: black;
 }
 
-.control-panel .pill-btn {
+.pill-btn {
   background: transparent !important;
   border: 3px solid white !important;
   color: white !important;
@@ -432,8 +438,8 @@ h3 {
   position: relative;
 }
 
-.control-panel .pill-btn::before,
-.control-panel .pill-btn::after {
+.pill-btn::before,
+.pill-btn::after {
   content: "";
   position: absolute;
   top: -3px;
@@ -446,47 +452,47 @@ h3 {
   transition: all 0.3s ease;
 }
 
-.control-panel .pill-btn:hover::before {
+.pill-btn:hover::before {
   left: -13px;
   width: calc(100% + 20px);
 }
 
-.control-panel .pill-btn:hover::after {
+.pill-btn:hover::after {
   left: -23px;
   width: calc(100% + 40px);
 }
 
-.control-panel .pill-btn.purple {
+.pill-btn.purple {
   border: 3px solid #ac8df2 !important;
   color: #ac8df2 !important;
 }
 
-.control-panel .pill-btn.purple::before,
-.control-panel .pill-btn.purple::after {
+.pill-btn.purple::before,
+.pill-btn.purple::after {
   border: 3px solid #ac8df2;
 }
 
-.control-panel .pill-btn.blue {
+.pill-btn.blue {
   border: 3px solid #99dbed !important;
   color: #99dbed !important;
 }
 
-.control-panel .pill-btn.blue::before,
-.control-panel .pill-btn.blue::after {
+.pill-btn.blue::before,
+.pill-btn.blue::after {
   border: 3px solid #99dbed;
 }
 
-.control-panel .pill-btn.green {
+.pill-btn.green {
   border: 3px solid #9febc9 !important;
   color: #9febc9 !important;
 }
 
-.control-panel .pill-btn.green::before,
-.control-panel .pill-btn.green::after {
+.pill-btn.green::before,
+.pill-btn.green::after {
   border: 3px solid #9febc9;
 }
 
-.control-panel .accents .tl-curve svg {
+.accents .tl-curve svg {
   position: fixed;
   top: 0;
   left: -50px;
@@ -494,7 +500,7 @@ h3 {
   height: 250px;
 }
 
-.control-panel .accents .br-curve svg {
+.accents .br-curve svg {
   position: fixed;
   bottom: 0;
   right: 0;
@@ -502,7 +508,7 @@ h3 {
   height: 150px;
 }
 
-.control-panel .accents .logo svg {
+.accents .logo svg {
   position: fixed;
   z-index: 3;
   top: 60px;
@@ -511,7 +517,9 @@ h3 {
   max-height: 75px;
 }
 
-.control-panel .dashboard {
+.control-panel .dashboard,
+.control-panel .not-ready,
+.bracket-setup .content {
   position: fixed;
   z-index: 2;
   top: 40px;
@@ -525,6 +533,20 @@ h3 {
   padding: 110px 20px 20px 20px;
 }
 
+.control-panel .dashboard .tabs {
+  position: absolute;
+  top: 20px;
+  left: 100px;
+}
+
+.control-panel .not-ready {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .control-panel .dashboard .menu .icon {
   position: absolute;
   top: 20px;
@@ -534,10 +556,6 @@ h3 {
 
 .control-panel .dashboard .menu .icon.bracket {
   left: 20px;
-}
-
-.control-panel .dashboard .menu .icon.settings {
-  right: 20px;
 }
 
 .control-panel .dashboard .menu .icon svg {
@@ -559,12 +577,18 @@ h3 {
 .control-panel .dashboard .controls .main-panel .matchup-controls {
   flex: 2;
   display: flex;
+  flex-direction: column;
+}
+
+.control-panel .dashboard .controls .main-panel .matchup-controls .matchup {
+  flex: 1;
+  display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 40px;
 }
 
-.control-panel .dashboard .controls .main-panel .matchup-controls .player {
+.control-panel .dashboard .controls .main-panel .matchup-controls .matchup .player {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -572,7 +596,7 @@ h3 {
   position: relative;
 }
 
-.control-panel .dashboard .controls .main-panel .matchup-controls .player .character {
+.control-panel .dashboard .controls .main-panel .matchup-controls .matchup .player .character {
   flex: 1;
   border: 2px solid white;
   border-radius: 10px;
@@ -601,7 +625,14 @@ h3 {
   z-index: 1;
 }
 
-.control-panel .dashboard .controls .main-panel .matchup-controls .player .character::before {
+.control-panel
+  .dashboard
+  .controls
+  .main-panel
+  .matchup-controls
+  .matchup
+  .player
+  .character::before {
   content: "";
   position: absolute;
   top: 0;
@@ -613,7 +644,15 @@ h3 {
   border-radius: 10px;
 }
 
-.control-panel .dashboard .controls .main-panel .matchup-controls .player .character .select {
+.control-panel
+  .dashboard
+  .controls
+  .main-panel
+  .matchup-controls
+  .matchup
+  .player
+  .character
+  .select {
   position: absolute;
   top: 60%;
   transform: translateY(20px);
@@ -621,30 +660,37 @@ h3 {
   opacity: 0;
 }
 
-.control-panel .dashboard .controls .main-panel .matchup-controls .player .character:hover .select {
+.control-panel
+  .dashboard
+  .controls
+  .main-panel
+  .matchup-controls
+  .matchup
+  .player
+  .character:hover
+  .select {
   transform: translateY(0px);
   opacity: 1;
 }
 
-.control-panel .dashboard .controls .main-panel .matchup-controls .player .winner,
-.control-panel .dashboard .controls .main-panel .matchup-controls .player .play-intro {
+.control-panel .dashboard .controls .main-panel .matchup-controls .matchup .player .winner,
+.control-panel .dashboard .controls .main-panel .matchup-controls .matchup .player .play-intro {
   align-self: center;
 }
 
-.control-panel .dashboard .controls .main-panel .matchup-controls .player .winner {
+.control-panel .dashboard .controls .main-panel .matchup-controls .matchup .player .winner {
   position: absolute;
   transform: translateY(calc(-100% - 20px));
 }
 
-.control-panel .dashboard .controls .main-panel .matchup-controls .vs {
+.control-panel .dashboard .controls .main-panel .matchup-controls .matchup .vs {
   padding: 0 35px;
   display: flex;
   flex-direction: column;
   transform: translateY(-35px);
 }
 
-.control-panel .dashboard .controls .main-panel .slide-controls,
-.control-panel .dashboard .controls .main-panel .screen-controls {
+.control-panel .dashboard .controls .main-panel .slide-controls {
   flex: 1;
 }
 
@@ -653,13 +699,18 @@ h3 {
 }
 
 .control-panel .dashboard .controls .main-panel .screen-controls {
+  flex: 1;
+}
+
+.control-panel .dashboard .controls .main-panel .screen-controls .screen-switch {
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   margin-bottom: 20px;
 }
 
-.control-panel .dashboard .controls .main-panel .screen-controls button {
+.control-panel .dashboard .controls .main-panel .screen-controls .screen-switch button {
   margin: 0 65px;
   font-size: 24px !important;
 }
@@ -672,18 +723,18 @@ h3 {
   padding: 0 50px;
 }
 
-.control-panel .dashboard .controls .sub-panel .coin-controls,
-.control-panel .dashboard .controls .sub-panel .timer-controls {
-  flex: 1 0 15%;
-}
-
 .control-panel .dashboard .controls .sub-panel .coin-controls {
+  flex: 1 0 15%;
   margin-bottom: 20px;
 }
 
 .control-panel .dashboard .controls .sub-panel .genre-controls {
   margin: 20px 100px;
   width: 100%;
+  height: 100%;
+}
+
+.control-panel .dashboard .controls .sub-panel .genre-controls .genre-key {
   display: flex;
   height: 100%;
   gap: 10px;
@@ -692,28 +743,28 @@ h3 {
   padding: 20px 40px;
 }
 
-.control-panel .dashboard .controls .sub-panel .genre-controls .genre,
-.control-panel .dashboard .controls .sub-panel .genre-controls .key {
+.control-panel .dashboard .controls .sub-panel .genre-controls .genre-key .genre,
+.control-panel .dashboard .controls .sub-panel .genre-controls .genre-key .key {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.control-panel .dashboard .controls .sub-panel .genre-controls .genre label,
-.control-panel .dashboard .controls .sub-panel .genre-controls .key label {
+.control-panel .dashboard .controls .sub-panel .genre-controls .genre-key .genre label,
+.control-panel .dashboard .controls .sub-panel .genre-controls .genre-key .key label {
   color: white;
 }
 
-.control-panel .dashboard .controls .sub-panel .genre-controls .genre .genre-display,
-.control-panel .dashboard .controls .sub-panel .genre-controls .key .key-display {
+.control-panel .dashboard .controls .sub-panel .genre-controls .genre-key .genre .genre-display,
+.control-panel .dashboard .controls .sub-panel .genre-controls .genre-key .key .key-display {
   margin: auto 0;
   text-align: center;
   font-weight: 600;
   font-size: 60px !important;
 }
 
-.control-panel .dashboard .controls .sub-panel .genre-controls .genre .genre-display {
+.control-panel .dashboard .controls .sub-panel .genre-controls .genre-key .genre .genre-display {
   font-family: "VTC Spike";
   padding: 12px 50px 0 50px;
   font-weight: 300;
@@ -725,7 +776,14 @@ h3 {
   position: relative;
 }
 
-.control-panel .dashboard .controls .sub-panel .genre-controls .genre .genre-display::before {
+.control-panel
+  .dashboard
+  .controls
+  .sub-panel
+  .genre-controls
+  .genre-key
+  .genre
+  .genre-display::before {
   content: "";
   position: absolute;
   top: -5px;
@@ -737,15 +795,18 @@ h3 {
   width: calc(100% + 40px);
 }
 
+/* Timer */
+
 .control-panel .dashboard .controls .sub-panel .timer-controls {
+  flex: 1 0 15%;
   margin-left: auto;
 }
 
-.control-panel .dashboard .controls .sub-panel .timer-controls .record {
+.control-panel .dashboard .controls .sub-panel .timer-controls .timer .record {
   position: relative;
 }
 
-.control-panel .dashboard .controls .sub-panel .timer-controls .record .circle {
+.control-panel .dashboard .controls .sub-panel .timer-controls .timer .record .circle {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -768,9 +829,10 @@ h3 {
   mask: radial-gradient(farthest-side, transparent calc(100% - 4px), black calc(100% - 4px));
   animation: rotate-circle 6s linear infinite;
   animation-play-state: paused;
+  pointer-events: none;
 }
 
-.control-panel .dashboard .controls .sub-panel .timer-controls .record.active .circle {
+.control-panel .dashboard .controls .sub-panel .timer-controls .timer .record.active .circle {
   animation-play-state: running;
 }
 
@@ -783,15 +845,14 @@ h3 {
   }
 }
 
-.control-panel .dashboard .controls .sub-panel .timer-controls .record .vinyl {
+.control-panel .dashboard .controls .sub-panel .timer-controls .timer .record .vinyl {
   width: 200px;
   height: 200px;
-  cursor: pointer;
   border: 3px solid white;
   border-radius: 50%;
 }
 
-.control-panel .dashboard .controls .sub-panel .timer-controls .record .tonearm {
+.control-panel .dashboard .controls .sub-panel .timer-controls .timer .record .tonearm {
   position: absolute;
   top: 70%;
   right: -50px;
@@ -800,41 +861,127 @@ h3 {
   width: auto;
   transform-origin: 65% 0%;
   transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
 }
 
-.control-panel .dashboard .controls .sub-panel .timer-controls .record.active .tonearm {
+.control-panel .dashboard .controls .sub-panel .timer-controls .timer .record.active .tonearm {
   transform: translateY(-50%) rotate(25deg);
 }
 
-.control-panel .dashboard .controls .sub-panel .timer-controls .record .clock {
+.control-panel .dashboard .controls .sub-panel .timer-controls .timer .record .clock {
   position: absolute;
+  z-index: 3;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 45px;
   margin: 0;
   color: black;
-  pointer-events: none;
   text-shadow: none;
   padding-left: 4px;
 }
 
-.control-panel .dashboard .controls .sub-panel .timer-controls .play-restart .icon {
-  color: white;
+.control-panel .dashboard .controls .sub-panel .timer-controls .timer .record .clock .time-input {
+  background: white;
+  padding: 5px;
+  border-radius: 5px;
+  position: relative;
+  top: -5px;
 }
 
-.control-panel .dashboard .controls .sub-panel .timer-controls .play-restart .icon svg {
+.control-panel .dashboard .controls .sub-panel .timer-controls .timer .record .edit-time {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.control-panel .dashboard .controls .sub-panel .timer-controls .timer .record:hover .edit-time {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.control-panel .dashboard .controls .sub-panel .timer-controls .timer .record .edit-time svg {
+  fill: white;
   width: auto;
   height: 50px;
 }
 
-/* Bracket Setup */
+.control-panel .dashboard .controls .sub-panel .timer-controls .timer .play-restart .icon {
+  color: white;
+}
+
+.control-panel .dashboard .controls .sub-panel .timer-controls .timer .play-restart .icon svg {
+  width: auto;
+  height: 50px;
+}
+
+.control-panel .brackets {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.control-panel .brackets .control-bracket {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.control-panel .brackets .control-bracket .reset {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+.control-panel .brackets .control-bracket .bracket-display {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0 20px;
+  max-width: 1300px;
+}
+
+.control-panel .brackets .control-bracket .bracket-display .round {
+  margin: 0 40px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.control-panel .brackets .control-bracket .bracket-display .round h3 {
+  flex: 1 0 100%;
+}
+
+.control-panel .brackets .control-bracket .bracket-display .round .match {
+  margin: 20px 0 30px 0;
+  flex: 1 0 50%;
+}
+
+.control-panel .brackets .control-bracket .bracket-display .round .match .vs {
+  margin: 5px 0;
+  font-size: 18px;
+}
+
+/* ============== Bracket Setup ============== */
 
 .bracket-setup .control svg {
   position: fixed;
   z-index: 999;
   top: 20px;
-  right: 30px;
+  left: 30px;
   color: white;
   width: auto;
   height: 40px;
@@ -851,13 +998,20 @@ h3 {
 
 .bracket-setup .content {
   display: flex;
+  flex-direction: column;
+}
+
+.bracket-setup .content .dashboard {
+  flex: 1;
+  display: flex;
   align-items: center;
   justify-content: space-around;
   width: 100%;
   max-width: 1500px;
+  margin: -40px auto 0 auto;
 }
 
-.bracket-setup .content .characters {
+.bracket-setup .content .dashboard .characters {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -865,13 +1019,19 @@ h3 {
   margin-right: 100px;
 }
 
-.bracket-setup .content .characters .character-list {
+.bracket-setup .content .dashboard .characters .clear {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+.bracket-setup .content .dashboard .characters .character-list {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
 }
 
-.bracket-setup .content .characters .character-list .character {
+.bracket-setup .content .dashboard .characters .character-list .character {
   position: relative;
   flex: 1;
   align-items: center;
@@ -879,7 +1039,7 @@ h3 {
   flex-direction: column;
 }
 
-.bracket-setup .content .characters .character-list .character .char-card {
+.bracket-setup .content .dashboard .characters .character-list .character .char-card {
   border: 2px solid white;
   border-radius: 10px;
   width: 175px;
@@ -894,7 +1054,7 @@ h3 {
   position: relative;
 }
 
-.bracket-setup .content .characters .character-list .character .char-card::before {
+.bracket-setup .content .dashboard .characters .character-list .character .char-card::before {
   content: "";
   position: absolute;
   top: 0;
@@ -906,13 +1066,13 @@ h3 {
   border-radius: 10px;
 }
 
-.bracket-setup .content .characters .character-list .character .char-card h3 {
+.bracket-setup .content .dashboard .characters .character-list .character .char-card h3 {
   position: relative;
   z-index: 1;
   font-size: 24px;
 }
 
-.bracket-setup .content .characters .character-list .character .setup-btn {
+.bracket-setup .content .dashboard .characters .character-list .character .setup-btn {
   opacity: 0;
   pointer-events: none;
   padding: 15px;
@@ -923,13 +1083,13 @@ h3 {
   transform: translate(-50%, 20%);
 }
 
-.bracket-setup .content .characters .character-list .character:hover .setup-btn {
+.bracket-setup .content .dashboard .characters .character-list .character:hover .setup-btn {
   opacity: 1;
   pointer-events: auto;
   transform: translate(-50%, 0%);
 }
 
-.bracket-setup .content .stages .stage {
+.bracket-setup .content .dashboard .stages .stage {
   border: 2px solid white;
   border-radius: 10px;
   width: 450px;
@@ -946,7 +1106,7 @@ h3 {
   position: relative;
 }
 
-.bracket-setup .content .stages .stage::after {
+.bracket-setup .content .dashboard .stages .stage::after {
   content: "";
   position: absolute;
   top: 0;
@@ -958,7 +1118,7 @@ h3 {
   border-radius: 10px;
 }
 
-.bracket-setup .content .stages .stage .stage-btn {
+.bracket-setup .content .dashboard .stages .stage .stage-btn {
   opacity: 0;
   pointer-events: none;
   position: absolute;
@@ -968,13 +1128,13 @@ h3 {
   transform: translate(-50%, -35%);
 }
 
-.bracket-setup .content .stages .stage:hover .stage-btn {
+.bracket-setup .content .dashboard .stages .stage:hover .stage-btn {
   opacity: 1;
   pointer-events: auto;
   transform: translate(-50%, -50%);
 }
 
-.bracket-setup .content .stages .stage .stage-name {
+.bracket-setup .content .dashboard .stages .stage .stage-name {
   position: relative;
   z-index: 2;
 }
@@ -985,9 +1145,9 @@ h3 {
   text-shadow: none;
 }
 
-/* Home */
+/* ============== Home ============== */
 
-/* Stages */
+/* ============== Stages ============== */
 
 .stages .content {
   width: 100%;
@@ -1041,7 +1201,7 @@ h3 {
   box-shadow: 0px 0.982px 24.539px rgba(255, 55, 48, 0.79);
 }
 
-/* Battle */
+/* ============== Battle ============== */
 
 .battle::after {
   content: "";
@@ -1149,97 +1309,6 @@ h3 {
   left: calc(50% - 20px);
 }
 
-/* Winner */
-
-.battle .content.winner-selected.fighter1 .fighter1 {
-  left: 50%;
-  right: initial;
-  transform: translateX(-50%);
-  transition: all 0.2s ease;
-}
-
-.battle .content.winner-selected.fighter1 .fighter1 img {
-  transform: scale(1.4);
-  transition: all 2s ease;
-}
-
-.battle .content.winner-selected.fighter1 .fighter2 {
-  right: -1000%;
-  left: initial;
-  transition: all 2s linear;
-}
-
-.battle .content.winner-selected.fighter1 .vs {
-  right: -1000%;
-  left: initial;
-  transition: all 2s linear;
-}
-
-.battle .content.winner-selected.fighter2 .fighter2 {
-  right: 50%;
-  left: initial;
-  transform: translateX(50%);
-  transition: all 0.2s ease;
-}
-
-.battle .content.winner-selected.fighter2 .fighter2 img {
-  transform: scale(1.4);
-  transition: all 2s ease;
-}
-
-.battle .content.winner-selected.fighter2 .fighter1 {
-  left: -1000%;
-  right: initial;
-  transition: all 2s linear;
-}
-
-.battle .content.winner-selected.fighter2 .vs {
-  left: -1000%;
-  right: initial;
-  transition: all 2s linear;
-}
-
-.battle .content .fighter .winner {
-  position: absolute;
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -20%);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.2s ease;
-}
-
-.battle .content .fighter img:hover ~ .winner,
-.battle .content .fighter .name:hover ~ .winner,
-.battle .content .fighter .winner:hover {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, -80%);
-}
-
-.battle .content .fighter .win {
-  position: absolute;
-  z-index: 2;
-  top: 80%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 40px;
-  display: none;
-}
-
-.battle .content.fighter1 .fighter .win.player1 {
-  display: block;
-  color: #f82b2e;
-  text-shadow: 0px 0.942px 23.544px rgba(255, 212, 210, 0.79);
-}
-
-.battle .content.fighter2 .fighter .win.player2 {
-  display: block;
-  color: #66ccff;
-  text-shadow: 0px 0.942px 23.544px #66ccff;
-}
-
 @keyframes streak {
   0% {
     transform: translate(0%, -150%);
@@ -1269,7 +1338,7 @@ h3 {
   }
 }
 
-/* Fighters */
+/* ============== Fighters ============== */
 
 .fighters::before {
   content: "";
@@ -1426,7 +1495,7 @@ h3 {
   }
 }
 
-/* Bracket */
+/* ============== Bracket ============== */
 
 .bracket .logo {
   position: fixed;
@@ -1512,52 +1581,6 @@ h3 {
   transform: translate(-50%, -50%);
 }
 
-/* Countdown */
-.countdown {
-  position: fixed; /* Ensure it stays in the same position */
-  bottom: -200px; /* Hide offscreen at the bottom */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Adjust for element size */
-  text-align: center;
-  background: #0b1e2d;
-  padding: 20px; /* Reduced padding */
-  border: 2px solid #66ccff;
-  border-radius: 5px; /* Smaller border radius */
-  box-shadow: 0 0 8px #66ccff; /* Reduced shadow size */
-  z-index: 1000; /* Ensure it is above other elements */
-  transition: bottom 0.3s ease; /* Smooth slide-in effect */
-}
-
-.countdown.visible {
-  bottom: 20px; /* Slide up into view */
-}
-
-.countdown-timer {
-  font-size: 80px; /* Larger font size for the timer */
-  color: #ff4b6e;
-  margin: 0 0 10px 0;
-}
-
-.countdown-controls {
-  display: flex;
-  justify-content: center;
-  gap: 10px; /* Space between icons */
-}
-
-.icon-btn {
-  background: none;
-  border: none;
-  color: #66ccff;
-  font-size: 24px; /* Icon size */
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.icon-btn:hover {
-  transform: scale(1.2); /* Slightly enlarge on hover */
-  color: #ff4b6e;
-}
-
 /* Coin Toss */
 .coin-toss {
   position: fixed; /* Ensure it stays in the same position */
@@ -1584,45 +1607,7 @@ h3 {
   padding: 5px 10px;
 }
 
-/* Randomizer */
-.randomizer {
-  position: fixed;
-  top: -200px; /* Hide above the screen */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%);
-  text-align: center;
-  background: #0b1e2d;
-  padding: 20px;
-  border: 3px solid #66ccff;
-  border-radius: 8px;
-  box-shadow: 0 0 12px #66ccff;
-  z-index: 1000;
-  transition: top 0.3s ease; /* Smooth slide-in effect */
-}
-
-.randomizer.visible {
-  top: 20px; /* Slide down into view */
-}
-
-.randomizer h2 {
-  font-size: 32px;
-  color: #66ccff;
-  margin: 0 0 15px 0;
-}
-
-.randomizer .glow-btn {
-  font-size: 18px;
-  padding: 10px 15px;
-  cursor: pointer;
-}
-
-.randomizer .glow-btn:disabled {
-  background: #132b3a;
-  color: #666;
-  cursor: not-allowed;
-}
-
-/* Donate */
+/* ============== Donate ============== */
 
 .donate .content {
   display: flex;
@@ -1690,40 +1675,4 @@ h3 {
   top: 80px;
   width: auto;
   margin: 0 auto;
-}
-
-.intro-btn {
-  font-size: 18px;
-  margin-top: 10px;
-  padding: 5px 10px;
-  background: #132b3a;
-  border: 2px solid #66ccff;
-  color: #fff;
-  text-shadow: 0 0 5px #ff003c;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-
-  font-size: 28px;
-  position: absolute;
-  bottom: 80px;
-  left: 50%;
-  transform: translate(-50%, -20%);
-
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.2s ease;
-}
-
-.intro-btn:hover {
-  background: #0b1e2d;
-  color: #ff4b6e;
-  text-shadow: 0 0 5px #ff4b6e;
-}
-
-.battle .content .fighter img:hover ~ .intro-btn,
-.battle .content .fighter .name:hover ~ .intro-btn,
-.battle .content .fighter .intro-btn:hover {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, -50%);
 }

@@ -7,7 +7,7 @@ import { Link } from "react-router";
 // import localforage from "localforage";
 
 export default function Setup() {
-  const { data, getValue, setValue, removeValue } = useContext(StorageContext);
+  const { data, getValue, setValue, removeValue, clearAll } = useContext(StorageContext);
   const { refreshAssets } = useContext(AssetsContext);
   const [open, setOpen] = useState(false);
   const [stageImage, setStageImage] = useState(null);
@@ -23,6 +23,16 @@ export default function Setup() {
     avatar: null,
     avatarPreview: null,
   });
+
+  const clearStorage = async () => {
+    await clearAll();
+    await setValue("currentScreen", "home");
+    refreshAssets();
+    setStageName("");
+    setStageImage(null);
+    setStagePreview(null);
+    setCharacters([]);
+  };
 
   /* ========= STAGE ========== */
 
@@ -177,12 +187,63 @@ export default function Setup() {
 
   return (
     <div className="bracket-setup container">
-      <div className="content">
-        <Link to="/admin/control">
-          <IconButton className="icon control" aria-label="control">
-            <VideogameAsset />
-          </IconButton>
-        </Link>
+      <div className="accents">
+        <div className="tl-curve">
+          <svg
+            width="629"
+            height="391"
+            viewBox="0 0 629 391"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="-1108.07"
+              y="-354.075"
+              width="1713.67"
+              height="722.149"
+              rx="361.075"
+              stroke="#AC8DF2"
+              stroke-width="45.8507"
+            />
+            <rect
+              x="-930.403"
+              y="-354.075"
+              width="1364.06"
+              height="722.149"
+              rx="361.075"
+              stroke="#AC8DF2"
+              stroke-width="45.8507"
+            />
+          </svg>
+        </div>
+        <div className="br-curve">
+          <svg
+            width="1005"
+            height="181"
+            viewBox="0 0 1005 181"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="21.1642"
+              y="21.1642"
+              width="1582.02"
+              height="666.672"
+              rx="333.336"
+              stroke="#AC8DF2"
+              stroke-width="42.3284"
+            />
+            <rect
+              x="185.187"
+              y="21.1642"
+              width="1259.27"
+              height="666.672"
+              rx="333.336"
+              stroke="#AC8DF2"
+              stroke-width="42.3284"
+            />
+          </svg>
+        </div>
         <div className="logo">
           <svg
             width="543"
@@ -256,234 +317,247 @@ export default function Setup() {
             />
           </svg>
         </div>
-        <div className="characters">
-          <h1>Characters</h1>
-          <div className="character-list">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((charNum) => {
-              return (
-                <div className={`character character${charNum}`} key={charNum}>
-                  <h2 style={{ fontFamily: "VT323", letterSpacing: "1px", marginBottom: 0 }}>
-                    Character {charNum}
-                  </h2>
-                  <div
-                    className="char-card"
-                    style={
-                      characters?.[charNum]?.avatarPreview
-                        ? {
-                            backgroundImage: `url(${characters?.[charNum].avatarPreview})`,
-                            backgroundSize: "cover",
-                            backgroundPosition: "top",
-                            backgroundRepeat: "no-repeat",
-                          }
-                        : {}
-                    }
-                  >
-                    <h3 style={{ fontFamily: "VT323", letterSpacing: "1px" }}>
-                      {characters?.[charNum]?.name || ""}
-                    </h3>
+      </div>
+      <div className="content">
+        <Link to="/admin/control">
+          <IconButton className="icon control" aria-label="control">
+            <VideogameAsset />
+          </IconButton>
+        </Link>
+
+        <div className="dashboard">
+          <div className="characters">
+            <h1>Characters</h1>
+            <div className="character-list">
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((charNum) => {
+                return (
+                  <div className={`character character${charNum}`} key={charNum}>
+                    <h2 style={{ fontFamily: "VT323", letterSpacing: "1px", marginBottom: 0 }}>
+                      Character {charNum}
+                    </h2>
+                    <div
+                      className="char-card"
+                      style={
+                        characters?.[charNum]?.avatarPreview
+                          ? {
+                              backgroundImage: `url(${characters?.[charNum].avatarPreview})`,
+                              backgroundSize: "cover",
+                              backgroundPosition: "top",
+                              backgroundRepeat: "no-repeat",
+                            }
+                          : {}
+                      }
+                    >
+                      <h3 style={{ fontFamily: "VT323", letterSpacing: "1px" }}>
+                        {characters?.[charNum]?.name || ""}
+                      </h3>
+                    </div>
+                    <button
+                      className="glow-btn setup-btn"
+                      onClick={() => handleCharacterSetupOpen(charNum)}
+                    >
+                      Setup
+                    </button>
                   </div>
-                  <button
-                    className="glow-btn setup-btn"
-                    onClick={() => handleCharacterSetupOpen(charNum)}
-                  >
-                    Setup
-                  </button>
+                );
+              })}
+            </div>
+            <Button variant="contained" className="pill-btn purple clear" onClick={clearStorage}>
+              Clear All Storage
+            </Button>
+            <Dialog
+              className="dialog"
+              fullWidth
+              open={openCharacterDialog}
+              onClose={handleCharacterSetupClose}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "16px 24px 0 24px",
+                }}
+              >
+                <h3 style={{ margin: 0 }}>Setup Character {character.id}</h3>
+                <IconButton aria-label="close" onClick={handleCharacterSetupClose} size="large">
+                  <Close />
+                </IconButton>
+              </div>
+              <DialogContent>
+                <TextField
+                  label="Character Name"
+                  variant="outlined"
+                  fullWidth
+                  value={character.name}
+                  onChange={(e) => handleCharacterChange("name", e.target.value)}
+                  margin="normal"
+                />
+                <TextField
+                  label="Instagram"
+                  variant="outlined"
+                  fullWidth
+                  value={character.insta}
+                  onChange={(e) => handleCharacterChange("insta", e.target.value)}
+                  margin="normal"
+                />
+                <div style={{ marginTop: 16 }}>
+                  <p>Intro Song (wav or mp3):</p>
+                  <input
+                    accept="audio/wav, audio/mp3, audio/mpeg"
+                    style={{ display: "none" }}
+                    id="intro-song-upload"
+                    type="file"
+                    onChange={(e) => handleCharacterIntroSongChange(e)}
+                  />
+                  <label htmlFor="intro-song-upload">
+                    <Button variant="outlined" component="span">
+                      Upload Intro Song
+                    </Button>
+                  </label>
+                  {character.introSong && (
+                    <audio
+                      controls
+                      src={URL.createObjectURL(character.introSong)}
+                      style={{ display: "block", marginTop: 8, width: "100%" }}
+                    >
+                      Your browser does not support the audio element.
+                    </audio>
+                  )}
                 </div>
-              );
-            })}
+                <div style={{ marginTop: 16, display: "flex" }}>
+                  <div style={{ marginRight: 24 }}>
+                    <p>Avatar:</p>
+                    <input
+                      accept="image/jpeg, image/jpg, image/png"
+                      style={{ display: "none" }}
+                      id="avatar-upload"
+                      type="file"
+                      onChange={(e) => handleCharacterAvatarChange(e)}
+                    />
+                    <label htmlFor="avatar-upload">
+                      <Button variant="outlined" component="span">
+                        Upload Avatar
+                      </Button>
+                    </label>
+                  </div>
+                  {character.avatarPreview && (
+                    <div
+                      style={{
+                        flex: 1,
+                        border: "2px solid #ff4081",
+                        borderRadius: 8,
+                        padding: 8,
+                        marginTop: 8,
+                        background: "rgb(164 164 164)",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        minHeight: 120,
+                        overflow: "hidden",
+                      }}
+                    >
+                      <img
+                        src={character.avatarPreview}
+                        alt="Avatar Preview"
+                        style={{
+                          maxWidth: "100%",
+                          maxHeight: 180,
+                          borderRadius: 6,
+                          display: "block",
+                          marginBottom: "-20px",
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+              </DialogContent>
+              <DialogActions>
+                <Button variant="outlined" onClick={handleCharacterSetupClear}>
+                  Clear
+                </Button>
+                <Button variant="contained" onClick={handleCharacterSetupSave}>
+                  Save
+                </Button>
+              </DialogActions>
+            </Dialog>
           </div>
-          <Dialog
-            className="dialog"
-            fullWidth
-            open={openCharacterDialog}
-            onClose={handleCharacterSetupClose}
-          >
+          <div className="stages">
+            <h1>Stage</h1>
             <div
+              className="stage"
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                padding: "16px 24px 0 24px",
+                backgroundImage: `url(${stagePreview})`,
               }}
             >
-              <h3 style={{ margin: 0 }}>Setup Character {character.id}</h3>
-              <IconButton aria-label="close" onClick={handleCharacterSetupClose} size="large">
-                <Close />
-              </IconButton>
+              <h3 className="stage-name">{stageName}</h3>
+              <button className="glow-btn stage-btn" onClick={handleStageOpen}>
+                Select Stage
+              </button>
             </div>
-            <DialogContent>
-              <TextField
-                label="Character Name"
-                variant="outlined"
-                fullWidth
-                value={character.name}
-                onChange={(e) => handleCharacterChange("name", e.target.value)}
-                margin="normal"
-              />
-              <TextField
-                label="Instagram"
-                variant="outlined"
-                fullWidth
-                value={character.insta}
-                onChange={(e) => handleCharacterChange("insta", e.target.value)}
-                margin="normal"
-              />
-              <div style={{ marginTop: 16 }}>
-                <p>Intro Song (wav or mp3):</p>
-                <input
-                  accept="audio/wav, audio/mp3, audio/mpeg"
-                  style={{ display: "none" }}
-                  id="intro-song-upload"
-                  type="file"
-                  onChange={(e) => handleCharacterIntroSongChange(e)}
-                />
-                <label htmlFor="intro-song-upload">
-                  <Button variant="outlined" component="span">
-                    Upload Intro Song
-                  </Button>
-                </label>
-                {character.introSong && (
-                  <audio
-                    controls
-                    src={URL.createObjectURL(character.introSong)}
-                    style={{ display: "block", marginTop: 8, width: "100%" }}
-                  >
-                    Your browser does not support the audio element.
-                  </audio>
-                )}
+            <Dialog className="dialog" fullWidth open={open} onClose={handleStageClear}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "16px 24px 0 24px",
+                }}
+              >
+                <h3 style={{ margin: 0 }}>Add Stage Details</h3>
+                <IconButton aria-label="close" onClick={handleStageClose} size="large">
+                  <Close />
+                </IconButton>
               </div>
-              <div style={{ marginTop: 16, display: "flex" }}>
-                <div style={{ marginRight: 24 }}>
-                  <p>Avatar:</p>
+              <DialogContent>
+                <TextField
+                  label="Stage Name"
+                  variant="outlined"
+                  fullWidth
+                  value={stageName}
+                  onChange={(e) => setStageName(e.target.value)}
+                  margin="normal"
+                />
+                <div style={{ marginTop: 16 }}>
+                  <p>Select an image:</p>
                   <input
                     accept="image/jpeg, image/jpg, image/png"
                     style={{ display: "none" }}
-                    id="avatar-upload"
+                    id="stage-image-upload"
                     type="file"
-                    onChange={(e) => handleCharacterAvatarChange(e)}
+                    onChange={handleStageImageChange}
                   />
-                  <label htmlFor="avatar-upload">
+                  <label htmlFor="stage-image-upload">
                     <Button variant="outlined" component="span">
-                      Upload Avatar
+                      Upload Image
                     </Button>
                   </label>
-                </div>
-                {character.avatarPreview && (
-                  <div
-                    style={{
-                      flex: 1,
-                      border: "2px solid #ff4081",
-                      borderRadius: 8,
-                      padding: 8,
-                      marginTop: 8,
-                      background: "rgb(164 164 164)",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      minHeight: 120,
-                      overflow: "hidden",
-                    }}
-                  >
+
+                  {stagePreview && (
                     <img
-                      src={character.avatarPreview}
-                      alt="Avatar Preview"
+                      src={stagePreview}
+                      alt="Preview"
                       style={{
                         maxWidth: "100%",
-                        maxHeight: 180,
-                        borderRadius: 6,
                         display: "block",
-                        marginBottom: "-20px",
+                        maxHeight: 320,
+                        borderRadius: 8,
+                        marginTop: 8,
                       }}
                     />
-                  </div>
-                )}
-              </div>
-            </DialogContent>
-            <DialogActions>
-              <Button variant="outlined" onClick={handleCharacterSetupClear}>
-                Clear
-              </Button>
-              <Button variant="contained" onClick={handleCharacterSetupSave}>
-                Save
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </div>
-        <div className="stages">
-          <h1>Stage</h1>
-          <div
-            className="stage"
-            style={{
-              backgroundImage: `url(${stagePreview})`,
-            }}
-          >
-            <h3 className="stage-name">{stageName}</h3>
-            <button className="glow-btn stage-btn" onClick={handleStageOpen}>
-              Select Stage
-            </button>
+                  )}
+                </div>
+              </DialogContent>
+              <DialogActions>
+                <Button variant="outlined" onClick={handleStageClear}>
+                  Clear
+                </Button>
+                <Button variant="contained" onClick={handleStageSave}>
+                  Save
+                </Button>
+              </DialogActions>
+            </Dialog>
           </div>
-          <Dialog className="dialog" fullWidth open={open} onClose={handleStageClear}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                padding: "16px 24px 0 24px",
-              }}
-            >
-              <h3 style={{ margin: 0 }}>Add Stage Details</h3>
-              <IconButton aria-label="close" onClick={handleStageClose} size="large">
-                <Close />
-              </IconButton>
-            </div>
-            <DialogContent>
-              <TextField
-                label="Stage Name"
-                variant="outlined"
-                fullWidth
-                value={stageName}
-                onChange={(e) => setStageName(e.target.value)}
-                margin="normal"
-              />
-              <div style={{ marginTop: 16 }}>
-                <p>Select an image:</p>
-                <input
-                  accept="image/jpeg, image/jpg, image/png"
-                  style={{ display: "none" }}
-                  id="stage-image-upload"
-                  type="file"
-                  onChange={handleStageImageChange}
-                />
-                <label htmlFor="stage-image-upload">
-                  <Button variant="outlined" component="span">
-                    Upload Image
-                  </Button>
-                </label>
-
-                {stagePreview && (
-                  <img
-                    src={stagePreview}
-                    alt="Preview"
-                    style={{
-                      maxWidth: "100%",
-                      display: "block",
-                      maxHeight: 320,
-                      borderRadius: 8,
-                      marginTop: 8,
-                    }}
-                  />
-                )}
-              </div>
-            </DialogContent>
-            <DialogActions>
-              <Button variant="outlined" onClick={handleStageClear}>
-                Clear
-              </Button>
-              <Button variant="contained" onClick={handleStageSave}>
-                Save
-              </Button>
-            </DialogActions>
-          </Dialog>
         </div>
       </div>
     </div>

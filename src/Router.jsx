@@ -1,14 +1,21 @@
-import { Routes, Route } from "react-router";
-import { ControlPanel, BracketSetup, Home, Donate, Stages } from "./screens";
-
-import Battle from "./screens/Battle.jsx";
-import Fighters from "./screens/Fighters.jsx";
-import Bracket from "./screens/Bracket.jsx";
+import { Routes, Route, Navigate } from "react-router";
+import {
+  ControlPanel,
+  BracketSetup,
+  Home,
+  Donate,
+  Stages,
+  Fighters,
+  Battle,
+  Bracket,
+} from "./screens";
 
 const Router = () => {
   return (
     <div id="main">
       <Routes>
+        <Route path="/" element={<Navigate to="/display" replace />} />
+
         {/* ADMIN */}
         <Route path="/admin/control" element={<ControlPanel />} />
         <Route path="/admin/bracket" element={<BracketSetup />} />

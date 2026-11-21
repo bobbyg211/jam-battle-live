@@ -61,6 +61,8 @@ function StorageProvider({ children, schema = {}, pingKey = PING_KEY }) {
 
   const isValid = useCallback(
     (key, value) => {
+      // Always allow objects and null values
+      if (typeof value === "object" || value === null) return true;
       const cfg = schema[key];
       return cfg?.validate ? !!cfg.validate(value) : true;
     },

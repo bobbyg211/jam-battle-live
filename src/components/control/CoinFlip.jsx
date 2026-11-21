@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React, { useState, useRef } from "react";
 
-export default function CoinFlip({ player1, player2 }) {
+export default function CoinFlip({ activeFighters }) {
   const [isFlipping, setIsFlipping] = useState(false);
   const [rotation, setRotation] = useState(0); // in deg, accumulates
   const [scale, setScale] = useState(1);
@@ -78,8 +78,12 @@ export default function CoinFlip({ player1, player2 }) {
       `}</style>
       <div className="coin3d-perspective" style={{ width: 120, height: 120, margin: "32px 0" }}>
         <div className="coin3d" style={{ transform: `rotateX(${rotation}deg) scale(${scale})` }}>
-          <div className="coin3d-face coin3d-heads">{player1}</div>
-          <div className="coin3d-face coin3d-tails">{player2}</div>
+          <div className="coin3d-face coin3d-heads">
+            {activeFighters?.fighter1?.name || "Fighter 1"}
+          </div>
+          <div className="coin3d-face coin3d-tails">
+            {activeFighters?.fighter2?.name || "Fighter 2"}
+          </div>
         </div>
       </div>
       <Button onClick={flipCoin} className="pill-btn green" variant="contained">
